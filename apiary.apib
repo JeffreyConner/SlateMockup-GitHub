@@ -709,9 +709,33 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TransactionTimestamps (array[Transaction Timestamp Base]) - Collection of timestamps associated with the transaction.
 + OriginatorElement (Originator Element) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
 + OperatorElement (Operator Element) - Inherited element required in the elements part of a transaction to denote who performed the transaction (the operator or cashier).
-+ ControlElement (Control Element) - Inherited element required in the elements part of a transaction to promote operator control information.
++ ControlElement - Inherited element required in the elements part of a transaction to promote operator control information.  Null for Board and Arts transactions.
 + ArtsTransactions (array[Arts Transaction Element]) - List of all arts transactions included in the parent transaction.
 + BoardTransactions (array[Board Element]) - List of all board included in the parent transaction.
++ NameValues (array[Name Value Pair]) - List of key value properties.
+
+## Operator Session Begin Base (object)
++ Include Generic Id
++ Disposition (Disposition Enumeration) - The state of the transaction.
++ ForcePost: false - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
++ TransactionTimestamps (array[Transaction Timestamp Base]) - Collection of timestamps associated with the transaction.
++ OriginatorElement (Originator Element) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
++ OperatorElement (Operator Element) - Inherited element required in the elements part of a transaction to denote who performed the transaction (the operator or cashier).
++ ControlElement (Control Element Session Begin) - Inherited element required in the elements part of a transaction to promote operator control information.
++ ArtsTransactions (array) - List of all arts transactions included in the parent transaction.
++ BoardTransactions (array) - List of all board included in the parent transaction.
++ NameValues (array[Name Value Pair]) - List of key value properties.
+
+## Operator Session End Base (object)
++ Include Generic Id
++ Disposition (Disposition Enumeration) - The state of the transaction.
++ ForcePost: false - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
++ TransactionTimestamps (array[Transaction Timestamp Base]) - Collection of timestamps associated with the transaction.
++ OriginatorElement (Originator Element) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
++ OperatorElement (Operator Element) - Inherited element required in the elements part of a transaction to denote who performed the transaction (the operator or cashier).
++ ControlElement (Control Element Session End) - Inherited element required in the elements part of a transaction to promote operator control information.
++ ArtsTransactions (array) - List of all arts transactions included in the parent transaction.
++ BoardTransactions (array) - List of all board included in the parent transaction.
 + NameValues (array[Name Value Pair]) - List of key value properties.
 
 ## Originator Element(object) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
@@ -759,13 +783,24 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Generic Id
 + Sequence: 3
 
-## Control Element (object)
+## Control Element Session Begin (object)
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
 + IsOnline: true - Indicated whether or not the device was online when the control operation occured.
 + Include Session Id
 + Include Generic Id
 + Include Sequence Number
-+ ControlType (enum) - Not currently checked but left in for future functionality.
++ ControlType: SignOn (enum) - Not currently checked but left in for future functionality.
+    + Members
+        + SignOn
+        + SignOff
+        
+## Control Element Session End (object)
++ TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
++ IsOnline: true - Indicated whether or not the device was online when the control operation occured.
++ Include Session Id
++ Include Generic Id
++ Include Sequence Number
++ ControlType: SignOff (enum) - Not currently checked but left in for future functionality.
     + Members
         + SignOn
         + SignOff
@@ -999,14 +1034,14 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Operator Session Begin Request (object)
 + Include Request Id
-+ Transaction (Transaction Base) - The transaction object associated with this operation.
++ Transaction (Operator Session Begin Base) - The transaction object associated with this operation.
 
 ## Operator Session Begin Response (object)
 + Include Processing Result Response
 
 ## Operator Session End Request (object)
 + Include Request Id
-+ Transaction (Transaction Base) - The transaction object associated with this operation.
++ Transaction (Operator Session End Base) - The transaction object associated with this operation.
 
 ## Operator Session End Response (object)
 + Include Processing Result Response
