@@ -783,6 +783,23 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Generic Id
 + Sequence: 3
 
+## Board Processing Result (object)
++ Include Request Id
++ ErrorCode: 0 - The result code.  0 means sucess.
++ DeniedText - The result message.
++ RegularGridLeft: 4 - Regular meal grid count left.
++ GuestGridLeft: 5 - Guest meal grid count left.
++ PeriodLeft: `-1` - Period meal count left.
++ DayLeft: `-1` - Day meal count left
++ WeekLeft: `-1` - Week meal count left
++ MonthLeft: `-1` - Month meal count left
++ SemesterQuarterLeft: `-1` - Semester/Quarter meal count left
++ YearLeft: `-1` - Year meal count left
++ GuestTotalLeft: `-1` - Guest meal total limit left
++ ExtraLeft: 0 - Extra meals left
++ TransferLeft: 0 - Transfer meals left
++ TypeUsed: 1 (Board Meal Type Used Enumeration) - Meal Type used.
+
 ## Control Element Session Begin (object)
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
 + IsOnline: true - Indicated whether or not the device was online when the control operation occured.
@@ -940,13 +957,27 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RoundingAmount: 0 - The rounding amount associated with the currency being used.  For example: Canada rounds to 0.05 for cash transactions.
 + Include Line Item Base
 
+## Line Item Processing Result (object)
++ Include Request Id
++ ErrorCode: 0 - The result code.  0 means sucess.
++ DeniedText - The result message.
++ TransactionLineItemType (Line Item Type Enumeration) - The type of line item this processing result represents.
+
 ## Name Value Pair (object)
 + Key - The key.
 + Value - The Value.
 
 ## Transaction Result Set Arts Base (object)
++ Include Request Id
++ ErrorCode: 0 - The result code.  0 means sucess.
++ DeniedText - The result message.
++ LineItemProcessingResults (array[Line Item Processing Result]) - List of results from the processing of each line item.
 
 ## Transaction Result Set Board Base (object)
++ Include Request Id
++ ErrorCode: 0 - The result code.  0 means sucess.
++ DeniedText - The result message.
++ ProcessingResults (array[Board Processing Result]) - Results from processing each board item.
 
 ## Transaction Timestamp Base (object)
 + TimestampType (Timestamp Type Enumeration) - The type of timestamp.
@@ -1199,6 +1230,16 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + CashEquivPeriodStartTime: `1899-12-30T02:00:00` - (Nullable) The start time for cash equivalency.
 + CashEquivPeriodStopTime: `1899-12-30T06:00:00` - (Nullable) The end time for cash equivalency.
 
+## Board Meal Type Used Enumeration (enum)
++ 1 - Regular, no Extra or Transfer
++ 2 - Guest Meal
++ 3 - Extra
++ 4 - Transfer
++ 5 - Extra and Regular
++ 6 - Transfer and Regular
++ 7 - Extra and Transfer
++ 8 - Regular, Extra, and Transfer
+
 ## Calculation Method Enumeration (enum)
 + Percentage - 0
 + Amount - 1
@@ -1228,6 +1269,30 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Complete: Finished at the originator.
 + Accepted: Finished at originator, and accepted by host/api/db.
 + Rejected: Finished at originator, but rejected by host/api/db
+
+## Line Item Type Enumeration (enum)
++ LineItemUndefined - An undefined line item type.
++ LineItemRetailTransactionBegin - Begin line items reporting.
++ LineItemComment - LineItemComment
++ LineItemDiscount - LineItemDiscount
++ LineItemProduct - LineItemProduct
++ LineItemProductPriceModifier - LineItemProductPriceModifier
++ LineItemProductTax - LineItemProductTax
++ LineItemProductTaxExempt - LineItemProductTaxExempt
++ LineItemProductTaxOverride - LineItemProductTaxOverride
++ LineItemStoredValue - LineItemStoredValue
++ LineItemStoredValueEnrichment - LineItemStoredValueEnrichment
++ LineItemSurcharge - LineItemSurcharge
++ LineItemTax - LineItemTax
++ LineItemTender - LineItemTender
++ LineItemTenderWithCustomer - LineItemTenderWithCustomer
++ LineItemTenderCashEquivalence - LineItemTenderCashEquivalence
++ LineItemTenderDtg - LineItemTenderDtg
++ LineItemTenderEmv - LineItemTenderEmv
++ LineItemTenderEmvTxnReq - Processing an EMV transaction request (TxnReq).
++ LineItemTenderEmvTxnResp - Processing an EMV transaction response (TxnResp).
++ LineItemTenderEmvGet1Resp - Processing an EMV Get1 response (Get1).
++ LineItemRetailTransactionEnd - End list of line items.
 
 ## Operator Session Begin Methods (enum)
 + PickListAndOperatorNumber - Operator can login by selecting their name from a list or provide their operator number and a PIN.
