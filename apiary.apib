@@ -1267,10 +1267,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ManuallyEntered - 1
 
 ## Rights Enumeration (enum)
-+ Board_Apply
-+ Board_Reverse
++ Undefined
 + BoardCashEquiv_Return
 + BoardCashEquiv_Sale
++ Board_Apply
++ Board_Reverse
 + CardUtility_Encode
 + CardUtility_View
 + Cash_Return
@@ -1279,6 +1280,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Check_Sale
 + CreditCard_Return
 + CreditCard_Sale
++ PosPriv
 + PosPriv_AgeVerify
 + PosPriv_AutoBoard
 + PosPriv_AutoEvent
@@ -1318,6 +1320,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + PosPriv_PrintReport
 + PosPriv_Return
 + PosPriv_SelectMenu
++ PosPriv_SlateSettings
 + PosPriv_StoredValAcctBalCheck
 + PosPriv_StoredValueCharge
 + PosPriv_StoredValueDeposit
@@ -1335,17 +1338,29 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + PrintReport_PosDailyAudit
 + PrintReport_ProftCntrDailyAudt
 + PrintReport_SessionDrawerAudit
++ SDeviceSettings_Edit
++ SDeviceSettings_View
++ SlateSettings_ExportOfflineTr
++ SlateSettings_RestoreDefaults
++ SlateSettings_SDeviceSettings
++ SlateSettings_SLogSettings
++ SlateSettings_SNetworkSettings
++ SLogSettings_Export
++ SLogSettings_View
++ SNetworkSettings_Edit
++ SNetworkSettings_View
 + StoredValue_Deposit
 + StoredValue_Return
 + StoredValue_Sale
 + StoredValue_Transfer
++ WsPriv
 + WsPriv_Board
 + WsPriv_BoardCashEquiv
 + WsPriv_Cash
 + WsPriv_Check
 + WsPriv_CreditCard
 + WsPriv_StoredValue
-+ OPR5000Settings_SNetworkSetting
++ PR5000Settings_SNetworkSetting
 + PR5000Settings_SLogSettings
 + PR5000Settings_SDeviceSettings
 + PR5000Settings_RestoreDefaults
@@ -1353,7 +1368,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + PR5000Settings_ExportOfflineTr
 + PR5000DSUpdates_View
 + PR5000DSUpdates_Apply
-+ PosPriv_PR5000Settings
++ PosPriv_PR5000Settingsing
 
 ## Schedule Type Enumeration (enum)
 + Daily
