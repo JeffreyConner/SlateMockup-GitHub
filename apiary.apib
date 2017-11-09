@@ -514,6 +514,16 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Customer Identification Requirements Base (object)
 
+## Device Properties Base (object)
++ Description: Sample Slate Device Another (string) - The description of the device.
++ Include Device Guid
++ DeviceId: 171 (number) - Id of the device.
++ MacAddress: AA:BB:CC:DD:EE:GG (string) - The MAC address for the device.
++ SerialNumber: `serialnumber321` (string) - The Serial Number of the device.
++ DeviceType: (Device Type Enumeration) - The type of device.
++ LicenseExpirationDate: `2012-04-23T18:25:43.511Z` (string) - (Nullable) The date and time the license for the device expires.
++ IsRegistered: true (boolean) - Indicates if the device has been registered.
+
 ## Device Registration Base (object)
 + Name: Sample Slate Device (string, required) - The name of the device.
 + MacAddress: AA:BB:CC:DD:EE:FF (string, required) - The MAC address for the device.
@@ -534,7 +544,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + StoredValueAccounts (array[Stored Value Account Base]) - List of all stored value accounts supported on the device.
 + TaxSchedules (array[Tax Schedule Base]) - List of tax schedules for the device.
 + Tenders (array[Tender Base]) - List of tenders for the device.
-+ Properties (array[NameValuePair]) - Properties bag for the device.
++ Properties (Device Properties Base) - Device properties.
 
 ## Encoded Image (object)
 + Image: `base64encoded string` (string) - The image as a base 64 encoded string.
@@ -1177,6 +1187,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Customer Id (object)
 + CustomerId: `6492868F-3891-42AE-8C02-D9A5C8D5A321` (string) - The unique identifier for the customer (GUID).
+
+## Device Guid (object)
++ DeviceGuid: `15ADD661-F878-42E5-A283-D88322CBBA4F` (string) - The unique identifier for the device (GUID).
 
 ## Device Id (object)
 + DeviceId: `15ADD661-F878-42E5-A283-D88322CBBA4F` (string) - The unique identifier for the device (GUID).
