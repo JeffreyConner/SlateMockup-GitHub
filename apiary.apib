@@ -292,6 +292,21 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
 
+
+### Process an event transaction [POST /transact/api/transaction/event]
++ Request (application/json)
+    + Attributes (Transaction Event Post Request)
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Transaction Event Post Response)
+
++ Response 400 (application/json)
+    - Response code 400 is returned if there is a problem with any of the request parameters.
+    + Attributes (Response 400 Error)
+
 # Data Structures
 
 ## Action Result Token Base (object)
@@ -993,6 +1008,24 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TimestampType (Timestamp Type Enumeration) - The type of timestamp.
 + Timestamp: `2012-04-23T18:25:43.511Z` - The timestamp.
 
+## Transaction Event Base (object)
++ Include Originator Guid
++ Include Cashier Guid
++ Include Customer Guid
++ TransactionDateTime: `2012-04-23T18:25:43.511Z` (string) - (DateTime object) Date/Time when the Event Transaction occurred at the POS.
++ ForcePost: false (boolean) - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
++ TransactionType: 101 (number) - Event Transaction Type
+
+## Transaction Event Processing Result Base (object)
++ ErrorCode: 0 - The result code.  0 means sucess.
++ DeniedText - The result message.
++ DisplayAttendance: true (boolean) - Display Attendance
++ Attendance: 5 (number) - Attendance
++ Capacity: 5 (number) - Capacity
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
++ TransactionType: 102 (number) - Event Transaction Type
+
 ## Request and Response Objects section do not use for documentation (object)
 + x: `************************************************************************************************`
 
@@ -1176,6 +1209,15 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ArtsTransactionProcessingResultSet (Transaction Result Set Arts Base) - The results of any arts transactions that might have occured.
 + BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occured.
 
+## Transaction Event Post Request (object)
++ Include Request Id
++ EventTransaction (Transaction Event Base)
++ EventNumber: 11 (number) - Event number
+
+## Transaction Event Post Response (object)
++ Include Request Id
++ Result (Transaction Event Processing Result Base)
+
 ## Common Base Types Section (object) - do not use for documentation
 + x: `**********************************************************************************`
 
@@ -1206,6 +1248,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Operator Id (object)
 + OperatorId: `8D9CC985-ABDC-4851-BCEB-520B877031C8` (string) - The unique identifier for the operator (GUID).
 
+## Originator Guid (object)
++ OriginatorGuid: `15ADD661-F878-42E5-A283-D88322CBBA4F` (string) - The unique identifier for the originator (GUID).
+
 ## Originator Id (object)
 + OriginatorId: `15ADD661-F878-42E5-A283-D88322CBBA4F` (string) - The unique identifier for the originator (GUID).
 
@@ -1217,6 +1262,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Session Id (object)
 + SessionId: `56653617-4853-4651-9C04-069E71C5075C` (string) - The unique identifier for the session (GUID).
+
+## Transaction Guid (object)
++ TransactionGuid: `FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF` (string) - The unique identifier for the transaction (GUID).
 
 ## Transaction Id (object)
 + TransactionId: `FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF` (string) - The unique identifier for the transaction (GUID).
