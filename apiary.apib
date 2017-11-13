@@ -526,6 +526,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LastModDateTime: `2017-01-30T18:25:43.511Z` (string) - Last Modified Date/Time.
 + LastModUsername: t (string) - Last Modified User Name.
 + DoorExtendedUnlockAllowed: F (string) - Denotes whether or not the customer will have an extended unlock on door devices.
++ MessageText - Message text.
 
 ## Customer Identification Requirements Base (object)
 
@@ -788,8 +789,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + KeyedOfflineFlag: false - True if this transaction was keyed offline.
 + ValidationType: AcceptedOffline (Validation Type Enumeration) - Specified if the transaction was accepted or denied while online or offline.
 + TranType: Sale (Transaction Type Enumeration) - Specified if the transaction is a sale or return
-+ ControlTotal: 12345.67 - Control total at the time of this transaction (including this transaction).
-+ ChangeInControlTotal: 12345.67 - The change in control total resulting from this transaction.  This should never be negative.
++ ControlTotal: 12345.67 (optional) - Control total at the time of this transaction (including this transaction).
++ ChangeInControlTotal: 12345.67 (optional) - The change in control total resulting from this transaction.  This should never be negative.
++ ControlTotalBeforeTransaction: 12345.67 (optional) - Control total immediately prior to this transaction -- Required for MF4100, Slate, and Cash Register device types.
++ ControlTotalAfterTransaction: 12345.67 (optional) - Control total immediately after this transaction -- Required for MF4100, Slate, and Cash Register device types.
 + LineItemProducts (array[Line Item Product]) - All of the products included in the arts transactions.  Empty set if there aren't any.
 + LineItemProductPromos (array) - Empty set (not used for PR5000 devices).
 + LineItemProductTaxes (array[Line Item Product Tax]) - All of the product tax modifiers included in the arts transactions.  Empty set if there aren't any.
