@@ -557,6 +557,8 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Device Settings Base (object)
 + Include Device Id
++ Include Merchant Guid
++ Include Profit Center Guid
 + Periods (array[Board Period Base]) - List of all meal periods.
 + BoardCashEquivalencyPeriods (array[Board Cash Equivalency Period Base]) - The board cash equivalency periods.  Used for offline cash equivalency transactions.
 + CardFormats (array[Card Format Base]) - List of card formats.
@@ -1256,6 +1258,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Line Item Sequence Number (object)
 + LineItemSequenceNumber: 1 - Indicated the order with which this line item appears in the list of arts transction line items.
 
+## Merchant Guid (object)
++ MerchantGuid: `8D9CC985-ABDC-4851-BCEB-520B877031C8` (string) - The unique identifier for the merchant (GUID).
+
 ## Operator Guid (object)
 + OperatorGuid: `8D9CC985-ABDC-4851-BCEB-520B877031C8` (string) - The unique identifier for the operator/cashier (GUID).
 
@@ -1267,6 +1272,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Originator Id (object)
 + OriginatorId: `15ADD661-F878-42E5-A283-D88322CBBA4F` (string) - The unique identifier for the originator (GUID).
+
+## Profit Center Guid (object)
++ ProfitCenterGuid: `15ADD661-F878-42E5-A283-D88322CBBA4F` (string) - The unique identifier for the profit center (GUID).
 
 ## Request Id (object)
 + RequestId: `5196CD76-D1D6-4E4B-A8FF-949113496F96` (string) - The unique identifier of the request (GUID).
