@@ -261,8 +261,29 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     
             Content-Type: application/json; charset=UTF-8
     + Attributes (Daily Report Get Response)
+
+
+### ProfitCenter Meal Count Report Get [GET /transact/api/report/profitcenter/{ProfitCenterGuid}/mealscount]
++ Attributes
+    + ProfitCenterGuid: `ffffffff-ffff-ffff-ffff-ffffffffffff` - The unique identifier for the profit center (GUID).
     
++ Response 200
+    + Headers
     
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Meal Count Report Get Response)
+
+
+### Pos Meal Count Report Get [GET /transact/api/report/pos/{PosGuid}/mealscount]
++ Attributes
+    + PosGuid: `ffffffff-ffff-ffff-ffff-ffffffffffff` - The unique identifier for the pos (GUID).
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Meal Count Report Get Response)
+
 # Group Service
 
 ## Service Healthcheck [GET /transact/api/healthcheck]
@@ -638,6 +659,13 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Message: Loopback OAuth test was successful. - Test result message.
 + EventId: 17 - The Event ID that would be used in the event a message is written to the event log.
 + EventCategory: 0 - The Event Category that would be used in the event a message is written to the event log.  0 means success.
+
+## Meals Count Report Base (object)
++ BoardPeriod: 3 (number) - Current board period number.
++ BoardPeriodName: `tb3b-lunch` (string) - Current board period name.
++ Location: `tb cr2002 - 3-1` (string) - POS/PC Name.
++ MealsCountDay: 10 (number) - Meals served for current day.
++ MealsCountPeriod: 20 (number) - Meals served for current period.
 
 ## Meal Type Base (object)
 + Id: 1 (number) - Board Meal Type Identifier.
@@ -1297,6 +1325,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Event Log Set Response (object)
 + Request (Event Log Set Request) - Requested that spawned this response.
+
+## Meal Count Report Get Response (object)
++ MealsCountReport (Meals Count Report Base)
 
 ## Operator PIN Change Request (object)
 + Include Request Id
