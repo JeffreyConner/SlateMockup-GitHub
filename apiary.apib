@@ -593,6 +593,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Tenders (array[Tender Base]) - List of tenders for the device.
 + Properties (Device Properties Base) - Device properties.
 + PosOptions (Pos Options Base) - Pos options.
++ PosCredentialSettings (Pos Credential Settings Base) - Pos credential settings.
 
 ## Encoded Image (object)
 + Image: `base64encoded string` (string) - The image as a base 64 encoded string.
@@ -685,6 +686,15 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + OperatorLoginRequirements (array[Credential Enumeration]) - Specifies the methods that Operators can use to login to the POS.
 + TsopProductVersion: 4.0.0.0 (string) - The product version of Transact OnPremise running on the server.
 + ShowMealPeriodCountReport: true - Indicates whether or not a client (or device) can show the meal count for a board period.
+
+## Pos Credential Settings Base (object)
++ MagstripeEnabled: true (boolean) - Credential type "Magstripe" enabled.
++ FeliCaEnabled: true (boolean) - Credential type "FeliCa" enabled.
++ MifareClassicEnabled: true (boolean) - Credential type "Mifare Classic" enabled.
++ MifareEV1Enabled: true (boolean) - Credential type "Mifare DESFire EV1" enabled.
++ MifareEV2Enabled: true (boolean) - Credential type "Mifare DESFire EV2" enabled.
++ MobileEnabled: true (boolean) - Credential type "Mobile" enabled.
++ BiometricEnabled: false (boolean) - Credential type "Biometric" enabled.
 
 ## Pos Options Base (object)
 + UseCashDrawer: true (boolean) - Use cash drawer.
