@@ -313,21 +313,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
 
-
-### Process an event transaction [POST /transact/api/transaction/event]
-+ Request (application/json)
-    + Attributes (Transaction Event Post Request)
-    
-+ Response 200
-    + Headers
-    
-            Content-Type: application/json; charset=UTF-8
-    + Attributes (Transaction Event Post Response)
-
-+ Response 400 (application/json)
-    - Response code 400 is returned if there is a problem with any of the request parameters.
-    + Attributes (Response 400 Error)
-
 # Data Structures
 
 ## Action Result Token Base (object)
@@ -890,6 +875,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ControlElement - Inherited element required in the elements part of a transaction to promote operator control information.  Null for Board and Arts transactions.
 + ArtsTransactions (array[Arts Transaction Element]) - List of all arts transactions included in the parent transaction.
 + BoardTransactions (array[Board Element]) - List of all board included in the parent transaction.
++ AttendenceTransactions (array[Attendance Element]) - List of all attendence event transactions included in the parent transaction.
 + NameValues (array[Name Value Pair]) - List of key value properties.
 
 ## Operator Session Begin Base (object)
@@ -952,9 +938,21 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemProductTaxExemptions (array) - Empty set (not used for PR5000 devices).
 + LineItemTenders (array[Line Item Tender Base]) - Tenders used during the transaction.
 
+## Attendance Element (object)
++ Include Transaction Id
++ Include Generic Id
++ Include Sequence Number
++ TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
++ IsOnline: true - Indicates whether or not the transaction performed online.
++ CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
++ TransactionType (Attended Event Transaction Type Enumeration) - The type of attendence transaction.
++ EventNumber: 1 - The number of the event.
++ Include Customer Guid
+
+
 ## Board Element (object)
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ IsOnline: true,
++ IsOnline: true - Indicates whether or not the transaction performed online.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
 + MealTypeId: 1
 + IsGuestMeal: false
@@ -1369,15 +1367,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ArtsTransactionProcessingResultSet (Transaction Result Set Arts Base) - The results of any arts transactions that might have occured.
 + BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occured.
 
-## Transaction Event Post Request (object)
-+ Include Request Id
-+ EventTransaction (Transaction Event Base)
-+ EventNumber: 11 (number) - Event number
-
-## Transaction Event Post Response (object)
-+ Include Request Id
-+ Result (Transaction Event Processing Result Base)
-
 ## Common Base Types Section (object) - do not use for documentation
 + x: `**********************************************************************************`
 
@@ -1438,6 +1427,19 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Attend Type Enumeration (enum)
 + Unattended - No operator present at the point of service.
 + Attended - Numerical value 1.  Operator present at the point of service.
+
+## Attended Event Transaction Type Enumeration (enum)
++ RegularEntry - Value type is 101
++ RegularReEntry - Value type is 102
++ RegularSwipeOut - Value type is 103
++ RegularReverse - Value type is 104
++ GuestEntry - Value type is 201
++ GuestReEntry - Value type is 202
++ GuestSwipeOut - Value type is 203
++ GuestReverse - Value type is 204
++ NonCustomerEntry - Value type is 301
++ NonCustomerSwipeOut - Value type is 303
++ NonCustomerReverse - Value type is 304
 
 ## Board Cash Equivalency Period Base (object)
 + PeriodNumber: 1 (number) - The period number.
