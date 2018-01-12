@@ -500,7 +500,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + CardNumber: 1234560000000022 (string) - The operator`s card number.
 + IssueNumber: null (string) - The operator`s card issue number.
 + RoleGroup: `065dfe36-7694-4571-b86c-d9bedacdbf77` - The unique identifier (Guid) of the role group the operator belongs to.
-        
+
+## Cash Drawer Properties Base (object)
++ UseCashDrawer: true (boolean) - Use Cash Drawer.
++ ForceCloseCashDrawer: false (boolean) - Indicator for Forcing the Cash Drawer Closed.
+
 ## Credential Enumeration (enum)
 + Track2 - Credential origin is from a card swipe of Track2 data.
 + ManualEntry - Credential origin was manually keyed.
@@ -545,6 +549,24 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Customer Identification Requirements Base (object)
 
+## Constraints Base (object)
++ AllowSubtotalExit: true (boolean) - Indicator to Allow Subtotal on Exit.
++ LimitTransactions: true (boolean) - Indicator to limit transactions.
++ LimitTransactionsAmount: 1 (number) - (Nullable) Limit Transactions Amount.
++ LimitCash: true (boolean) - Indicator to limit cash.
++ LimitCashAmount: 1 (number) - (Nullable) Limit Cash Amount.
++ MessageDelay: 1000 (number) - Message Delay in milliseconds.
++ ConfirmationBeep: true (boolean) - Indicator to enable confirmation beeps.
++ ProductMask: 999999999999XXXXXXXXXXXXXXXXXXXX (string) - Product Number Format Mask.
++ StoredValueCashEntryType (Purchase Entry Type Enumeration) - Purchase Entry Type.
++ MealsLeftByType (Meals Left By Enumeration) - Meals Left By.
+
+## Default Value Base (object)
++ DefaultBoardMealTypeId: 1 (number) - Default Board Plan Meal Type Association.
++ DefaultEquivBoardMealTypeId: 1 (number) - Default Cash Equivalency Transaction Board Meal Type Association.
++ DefaultBoardPlanId: 26 (number) - Default Board Plan Id.
++ ProductId: `-8` (number) - Product Id.
+
 ## Device Properties Base (object)
 + Description: Sample Slate Device Another (string) - The description of the device.
 + Include Device Guid
@@ -577,7 +599,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TaxSchedules (array[Tax Schedule Base]) - List of tax schedules for the device.
 + Tenders (array[Tender Base]) - List of tenders for the device.
 + Properties (Device Properties Base) - Device properties.
-+ PosOptions (Pos Options Base) - Pos options.
 + PosCredentialSettings (Pos Credential Settings Base) - Pos credential settings.
 
 ## Encoded Image (object)
@@ -610,6 +631,28 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include EventLog Summary Base 
 + TaskCategory: 1 (number) The task defined in the event.
 + Message: Event Log Message (string) - The message string.
+
+## Feature Availability Base (object)
++ AllowNoTax: false (boolean) - Allow no tax.
++ AllowCountDisplay: false (boolean) - Allow count display.
++ BoardAutoContinue: true (boolean) - Indicator to Auto Continue Board Transactions.
++ TurnstilerelayEnabled: false (boolean) - Turnstilerelay Enabled.
++ CardUtilityEnabled: false (boolean) - Card Utility Enabled.
++ AutoLogout: false (boolean) - Indicator to automatically logout.
++ AllowOfflineTransactions: true (boolean) - Indicator to allow offline transactions.
++ AllowOfflinePayments: true (boolean) - Indicator to allow offline payments.
++ AllowPayments: true (boolean) - Indicator to allow payments.
++ FreezeCustomerAccount: true (boolean) - Freeze Customer Account Indicator.
++ BalanceCheck: true (boolean) - Indicator to balance check.
++ DisplayMealsServed: false (boolean) - Indicator to display the meal served.
++ AllowCheckAttendance: true (boolean) - Allow event check attendance.
++ AllowReverse: true (boolean) - Indicator allowing event transaction reversals.
++ AllowEventTransaction: true (boolean) - Indicates if the POS can process event transactions.
++ CreditCardOfflineCallCenterAuth: true (boolean) - Indicator allowing credit card call center authorizations.
++ ScreenSaver: true (boolean) - Indicator allowing screen saver.
++ ScreenSaverTimeout: 10 (number) - Screen Saver Timeout (in minutes).
++ PoleScreenSaver: true (boolean) - Indicator enabling pole screen saver.
++ PoleDisplayTimeout: 10 (number) - Pole Display Timeout (in minutes).
 
 ## Healthcheck Item Database (object)
 + Name: Database Check - Healthcheck item that verifies connectivity to the Transact Database.
@@ -671,6 +714,22 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + OperatorLoginRequirements (array[Credential Enumeration]) - Specifies the methods that Operators can use to login to the POS.
 + TsopProductVersion: 4.0.0.0 (string) - The product version of Transact OnPremise running on the server.
 + ShowMealPeriodCountReport: true - Indicates whether or not a client (or device) can show the meal count for a board period.
++ DefaultValues (Default Value Base)
++ Constraints (Constraints Base)
++ FeatureAvailability (Feature Availability Base)
++ CashDrawerProperties (Cash Drawer Properties Base)
++ PrinterProperties (Printer Properties Base)
++ OverrideKeys (Override Keys Base)
+
+## Override Keys Base (object)
++ DiscountKey1 (Pos Option Payment Base) - Discount key 1.
++ DiscountKey2 (Pos Option Payment Base) - Discount key 2.
++ DiscountKey3 (Pos Option Payment Base) - Discount key 3.
++ DiscountKey4 (Pos Option Payment Base) - Discount key 4.
++ SurchargeKey1 (Pos Option Payment Base) - Surcharge key 1.
++ SurchargeKey2 (Pos Option Payment Base) - Surcharge key 2.
++ TaxKey1 (Pos Option Payment Base) - Tax key 1.
++ TaxKey2 (Pos Option Payment Base) - Tax key 2.
 
 ## Pos Credential Settings Base (object)
 + MagstripeEnabled: true (boolean) - Credential type "Magstripe" enabled.
@@ -681,99 +740,50 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + MobileEnabled: true (boolean) - Credential type "Mobile" enabled.
 + BiometricEnabled: false (boolean) - Credential type "Biometric" enabled.
 
-## Pos Options Base (object)
-+ UseCashDrawer: true (boolean) - Use cash drawer.
+## Pos Option Payment Base (object)
++ Type (Payment Type Enumeration) - Payment type.
++ Amount: 10 (number) - Amount.
+
+## Printer Properties Base (object)
 + UsePrinter: true (boolean) - Use printer.
-+ TurnstilerelayEnabled: true (boolean) - Turnstilerelay Enabled. 
-+ CardUtilityEnabled: true (boolean) - Card Utility Enabled.
-+ Name: wf pos option 1 (string) - Pos Option name.
-+ ReceiptHeaderActive: true (boolean) - Receipt Header Active.
-+ ReceiptHeader1: this is (string) - Receipt Header 1.
-+ ReceiptHeader2: wf pos (string) - Receipt Header 2.
-+ ReceiptHeader3: option 1 (string) - Receipt Header 3.
-+ ReceiptHeader4: header (string) - Receipt Header 4.
-+ ReceiptCouponActive: true (boolean) - Receipt Coupon Active.
-+ ReceiptCoupon1: this is (string) - Receipt Coupon 1.
-+ ReceiptCoupon2: wf pos (string) - Receipt Coupon 2.
-+ ReceiptCoupon3: option 1 (string) - Receipt Coupon 3.
-+ ReceiptCoupon4: coupon (string) - Receipt Coupon 4.
-+ ReceiptFooterActive: true (boolean) - Receipt Footer Active.
-+ ReceiptFooter1: this is (string) - Receipt Footer 1.
-+ ReceiptFooter2: wf pos (string) - Receipt Footer 2.
-+ ReceiptFooter3: option 1 (string) - Receipt Footer 3.
-+ ReceiptFooter4: coupon (string) - Receipt Footer 4.
-+ StoredValueCashEntryType (Purchase Entry Type Enumeration) - Purchase Entry Type.
-+ ForceCloseCashDrawer: true (boolean) - Force Close Cash Drawer.
-+ AllowSubtotalExit: true (boolean) - Allow Subtotal Exit.
-+ BoardAutoContinue: true (boolean) - Board Auto Continue. 
-+ CardnumManualEntryEnabled: true (boolean) - Cardnum Manual Entry Enabled.
-+ LimitTransactions: true (boolean) - Limit Transactions.
-+ LimitTransactionsAmount: 123456 (number) - Nullable Limit Transactions Amount.
-+ LimitCash: true (boolean) - Limit Cash.
-+ LimitCashAmount: 123456 (number) - Nullable Limit Cash Amount.
-+ AutoLogout: true (boolean) - Auto Logout.
-+ AllowOfflineTransactions: true (boolean) - Allow Offline Transactions.
-+ AllowOfflinePayments: true (boolean) - Allow Offline Payments. 
-+ AllowPayments: true (boolean) - Allow Payments.
-+ FreezeCustomerAccount: true (boolean) - Freeze Customer Account.
-+ BalanceCheck: true (boolean) - Balance Check.
-+ DisplayMealsServed: true (boolean) - Display Meals Served.
-+ AllowCheckAttendance: true (boolean) - Allow Check Attendance. 
-+ AllowReverse: true (boolean) - Allow Reverse.
-+ AllowEventTransaction: true (boolean) - Allow Event Transaction.
++ PrinterOnByDefault: false (boolean) - Indicator to set the printer on by default.
++ ReceiptGroupProduct: true (boolean) - Register should combine identical product line items on receipt and remote printer.
++ Header (Printer Properties Receipt Base) - Header.
++ Coupon (Printer Properties Receipt Base) - Coupon.
++ Footer (Printer Properties Receipt Base) - Footer.
++ ReceiptPrintFlags (Printer Properties Receipt Flags Base) - Receipt print flags.
++ ForcePrintFlags (Printer Properties Force Flags Base) - Force print flags.
+
+## Printer Properties Force Flags Base (object)
++ ForcePrintCash: false (boolean) - Indicator forcing the printing of cash transactions on the receipt.
++ ForcePrintCheck: false (boolean) - Indicator to force the printing check transactions on the receipt.
++ ForcePrintStoredValueTrans: false (boolean) - Indicator to print stored value transactions on the receipt.
++ ForcePrintCashEquivalent: false (boolean) - Indicator to print Cash Equivalency transactions on the receipt.
++ ForcePrintPaidOut: false (boolean) - Indicator to print Paid Outs on the receipt.
++ ForcePrintFreezeAccount: false (boolean) - Indicator to for the printing of Freezing Accounts on the receipt.
++ ForcePrintOverrings: false (boolean) - Indicator for the forcing of printing overrings on the receipt.
++ ForcePrintStoredValuePayment: false (boolean) - Indicator for the forcing of printing stored value payments on the receipt.
++ ForcePrintBoard: false (boolean) - Indicates that a board transaction will be forced to print.
++ ForcePrintEvent: false (boolean) - Indicates if an event transaction will be forced to print on the receipt.
+
+## Printer Properties Receipt Base (object)
++ Active: true (boolean) - Active.
++ Line1: abc (string) - Line 1.
++ Line2: abc (string) - Line 2.
++ Line3: abc (string) - Line 3.
++ Line4: abc (string) - Line 4.
+
+## Printer Properties Receipt Flags Base (object)
 + ReceiptPrintAgreeCreditCard: true (boolean) - Indicator to Print "I Agree to Pay..." for Credit Card on the receipt.
-+ ReceiptPrintAudit: true (boolean) - Indicator to Print Audit on Cashier.
-+ ReceiptPrintCustomerName: true (boolean) - Indicator to print customer name on receipt. 
++ ReceiptPrintAudit: false (boolean) - Indicator to Print Audit on Cashier Logoff.
++ ReceiptPrintCustomerName: true (boolean) - Indicator to print customer name on receipt.
 + ReceiptPrintCustomerNumber: true (boolean) - Indicator to print customer number on receipt.
 + ReceiptPrintCustomerBalance: true (boolean) - Indicator to print customer balance on receipt.
 + ReceiptPrintCardNumber: true (boolean) - Indicator to print card number on receipt.
 + ReceiptPrintDollars: true (boolean) - Indicator to Show Amount Deducted for Stored Value Tender Types.
-+ ReceiptPrintTransComment: true (boolean) - Indicator to print any transaction comments on the receipt. 
-+ ReceiptPrintBalanceBelow: true (boolean) - Indicator to print the balance below the limit on the receipt.
-+ ReceiptBalanceBelowAmount: 123456 (number) - Nullable Balance Below Threshold Amount.
-+ ForcePrintCash: true (boolean) - Indicator forcing the printing of cash transactions on the receipt.
-+ ForcePrintCheck: true (boolean) - Indicator to force the printing check transactions on the receipt. 
-+ ForcePrintStoredValueTrans: true (boolean) - Indicator to print stored value transactions on the receipt.
-+ ForcePrintCashEquivalent: true (boolean) - Indicator to print Cash Equivalancy transactions on the receipt.
-+ ForcePrintPaidOut: true (boolean) - Indicator to print Paid Outs on the receipt.
-+ ForcePrintFreezeAccount: true (boolean) - Indicator to for the printing of Freezing Accounts on the receipt.
-+ ForcePrintOverrings: true (boolean) - Indicator for the forcing of printing overrings on the receipt. 
-+ ForcePrintStoredValuePayment: true (boolean) - Indicator for the forcing of printing stored value payments on the receipt.
-+ ForcePrintBoard: true (boolean) - Indicates that a board transaction will be forced to print.
-+ ForcePrintEvent: true (boolean) - Indicates if an event transaction will be forced to print on the receipt. 
-+ PrinterOnByDefault: true (boolean) - Indicator to set the printer on by default.
-+ MessageDelay: 123456 (number) - Message Delay in milliseconds.
-+ ConfirmationBeep: true (boolean) - Indicator to enable confirmation beeps. 
-+ CreditCardOfflineCallCenterAuth: true (boolean) - Indicator allowing credit card call center authorizations.
-+ MealsLeftByType (Meals Left By Enumeration) - Display meals left by.
-+ DiscountKeyType1 (Payment Type Enumeration) - Discount Type 1
-+ DiscountKeyAmount1: 123456 (number) - Discount Amount Key 1
-+ DiscountKeyType2 (Payment Type Enumeration) - Discount Type 2
-+ DiscountKeyAmount2: 123456 (number) - Discount Amount Key 2
-+ DiscountKeyType3 (Payment Type Enumeration) - Discount Type 3
-+ DiscountKeyAmount3: 123456 (number) - Discount Amount Key 3
-+ DiscountKeyType4 (Payment Type Enumeration) - Discount Type 4
-+ DiscountKeyAmount4: 123456 (number) - Discount Amount Key 4
-+ SurchargeType1 (Payment Type Enumeration) - Surcharge Type 1
-+ SurchargeAmount1: 123456 (number) - Surcharge Amount 1
-+ SurchargeType2 (Payment Type Enumeration) - Surcharge Type 2
-+ SurchargeAmount2: 123456 (number) - Surcharge Amount 2
-+ TaxType1 (Payment Type Enumeration) - Tax Type 1
-+ TaxAmount1: 123456 (number) - Tax Amount 1
-+ TaxType2 (Payment Type Enumeration) - Tax Type 2
-+ TaxAmount2: 123456 (number) - Tax Amount 2
-+ ProductMask: 999999999999XXXXXXXXXXXXXXXXXXXX (string) - Product Number Format Mask
-+ ScreenSaver: true (boolean) - Indicator allowing screen saver.
-+ ScreenSaverTimeout: 123456 (number) - Screen Saver Timeout (in minutes).
-+ PoleScreenSaver: true (boolean) - Indicator enabling pole screen saver.
-+ PoleDisplayTimeout: 123456 (number) - Pole Display Timeout (in minutes).
-+ DefaultBoardMealTypeId: 123456 (number) - Nullable Default Board Plan Meal Type Association.
-+ DefaultEquivBoardMealTypeId: 123456 (number) - Nullable Default Cash Equivalancy Transaction Board Meal Type Association.
-+ DefaultBoardPlanId : 123456 (number) - Nullable Default Board Plan Id.
-+ ReceiptGroupProduct: true (boolean) - Register should combine identical product line items on receipt and remote printer.
-+ ProductId: 123456 (number) - Nullable Product Id
-+ AllowNoTax: true (boolean) - Allow no tax.
-+ AllowCountDisplay: true (boolean) - Allow count display.
++ ReceiptPrintTransComment: true (boolean) - Indicator to print any transaction comments on the receipt.
++ ReceiptPrintBalanceBelow: false (boolean) - Indicator to print the balance below the limit on the receipt.
++ ReceiptBalanceBelowAmount: 1 (number) - (Nullable) Print on Receipt - Balance Below Threshold Amount.
 + PrintBoardCashValueLimit: true (boolean) - Flag denoting whether the Print Board Cash Value Limit should be printed on receipts.
 
 ## Product Base (object)
@@ -853,7 +863,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Tax Tender Base (object)
 + TenderId: 1 (number) - The tender id.
 + TaxScheduleId: 1 (number) - The numeric identifier for the tax schedule this tax tender is assigned to.
-+ TaxPercent: 0.0998 (number) - Tax percent.  (If 9.98% tax rate, TaxPercent == 0.0998m)
++ TaxRate: 0.0998 (number) - Tax rate.  (If 9.98% tax rate, TaxPercent == 0.0998m)
 
 ## Tender Base (object)
 + Id: 4 (number) - The identifier of the tender
@@ -1546,7 +1556,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + None - 0
 + Amount - 1
 + Open - 2
-+ Percent - 3
++ Rate - 3
 
 ## Product Entry Method Type Enumeration (enum)
 + MenuItem - 0
