@@ -284,6 +284,17 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Meal Count Report Get Response)
 
+### Operator Sessions Get [GET /transact/api/report/originator/{OriginatorGuid}/cashDrawer/{CashDrawerNumber}/sessions]
++ Attributes
+    + OriginatorGuid: `dddddddd-dddd-dddd-dddd-dddddddddddd` - The unique identifier for the device (GUID).
+    + CashDrawerNumber: 1 (number) - Cash Drawer the cashier is using.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Operator Sessions Get Response)
+
 # Group Service
 
 ## Service Healthcheck [GET /transact/api/healthcheck]
@@ -389,18 +400,22 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + PrioritySequence: 1 (number) - Order in which the formats should be displayed/processed.
 + SiteCode: `some_site_code` (string) - Site Code on card.
 + SiteCodeStartPosition: 1 (number) - Start position of the site code.
-+ SiteCodeStartType: 0 (number) - (0) - Absolute position from the first digit on track 2; (1) - Relative positioning from the first field separator on track 2.
++ SiteCodeStartType (Card Format Start Type Enumeration) - Site code start type.
 + SiteCodeLength: 2 (number) - The length of the site code.
 + SiteCodeCheckOnline: false (boolean) - If online, check site code.
 + SiteCodeCheckOffline: false (boolean) - If offline, check site code.
 + IdNumberStartPosition: 0 (number) - The start position of the ID number.
-+ IdNumberStartType: 0 (number) - (0) - Absolute position from the first digit on track 2; (1) - Relative positioning from the first field separator on track 2.
++ IdNumberStartType (Card Format Start Type Enumeration) - Id number start type.
 + IdNumberLength: 12 (number) - The length of the Id number.
 + IssueNumberStart: 15 (number) - The position of the issue number.
-+ IssueNumberStartType: 0 (number) - Absolute position from the first digit on track 2; (1) - Relative positioning from the first field separator on track 2.
++ IssueNumberStartType (Card Format Start Type Enumeration) - Issue number start type.
 + IssueNumberLength: 2 (number) - Maximum length of issue number.
 + MinimumDigitsTrack2: 0 (number) - The minimum number of digits on track 2
 + MaximumDigitsTrack2: 22 (number) - The maximum number of digits on track 2
+
+## Card Format Start Type Enumeration (enum)
++ AbsoluteFromFirstDigit - Absolute position from the first digit on track 2
++ RelativeFromFirstSeparator - Relative positioning from the first field separator on track 2
 
 ## Customer Board Count (object)
 + BoardPlanId: 26
@@ -721,6 +736,13 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + PrinterProperties (Printer Properties Base)
 + OverrideKeys (Override Keys Base)
 
+## Operator Session Base (object)
++ SessionId: `817c6232-d354-4994-b37a-38f928d1c5ec` (string) - Session GUID.
++ StartDateTime: `2009-01-30T15:53:13.328+01:00` (string) - Session start date.
++ EndDateTime: `2018-01-13T16:15:40.352+01:00` (string) - Session end date.
++ OperatorName: `mp manager (1,1)` (string) - Cashier Name.
++ CashierNumber: 1 (number) - Cashier Number.
+
 ## Override Keys Base (object)
 + DiscountKey1 (Pos Option Payment Base) - Discount key 1.
 + DiscountKey2 (Pos Option Payment Base) - Discount key 2.
@@ -929,12 +951,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ControlTotal - Nullable value denoting the current control total on the device.
 
 ## Arts Transaction Element (object)
-+ Include Transaction Id
 + Include Generic Id
 + Include Sequence Number
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
 + CancelledFlag: false - True if this transaction is a cancelled transaction.
-+ KeyedOfflineFlag: false - True if this transaction was keyed offline.
 + ValidationType: AcceptedOffline (Validation Type Enumeration) - Specified if the transaction was accepted or denied while online or offline.
 + TranType: Sale (Transaction Type Enumeration) - Specified if the transaction is a sale or return
 + ControlTotal: 12345.67 (optional) - Control total at the time of this transaction (including this transaction).
@@ -953,7 +973,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Generic Id
 + Include Sequence Number
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ IsOnline: true - Indicates whether or not the transaction performed online.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
 + TransactionType (Attended Event Transaction Type Enumeration) - The type of attendence transaction.
 + EventNumber: 1 - The number of the event.
@@ -962,7 +981,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Board Element (object)
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ IsOnline: true - Indicates whether or not the transaction performed online.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
 + MealTypeId: 1
 + IsGuestMeal: false
@@ -1011,7 +1029,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
         + SignOff
 
 ## Line Item Base (object)
-+ Include Transaction Id
 + Include Line Item Sequence Number
 + VoidFlag: false - Indiciated whether or not this line item was void.
 
@@ -1033,8 +1050,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ExtendedDiscountAmount: 0.0 - Extended Discount Amount
 + ProductEntryMethodType (Product Entry Method Type Enumeration) - Product Entry Method Type
 + RetailPriceEntryMethodType (Retail Price Entry Method Type Enumeration) - Retail Price Entry Method Type
-+ UnitCostPrice: 0.0 - Unit Cost Price
-+ UnitCostPriceQuantity: 1 - Unit Cost Price Quantity
 + UnitListPrice: 0.0 - Unit List Price
 + UnitListPriceQuantity: 1 - Unit List Price Quantity
 + ProductPromotionFlag: false - Product Promotion Flag
@@ -1355,6 +1370,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Operator PIN Change Response (object)
 + Include Request Id
+
+## Operator Sessions Get Response (object)
++ OperatorSessions (array[Operator Session Base]) - List of operator sessions
 
 ## Operator Validate Request (object)
 + Include Request Id
