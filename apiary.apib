@@ -951,12 +951,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ControlTotal - Nullable value denoting the current control total on the device.
 
 ## Arts Transaction Element (object)
-+ Include Transaction Id
 + Include Generic Id
 + Include Sequence Number
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
 + CancelledFlag: false - True if this transaction is a cancelled transaction.
-+ KeyedOfflineFlag: false - True if this transaction was keyed offline.
 + ValidationType: AcceptedOffline (Validation Type Enumeration) - Specified if the transaction was accepted or denied while online or offline.
 + TranType: Sale (Transaction Type Enumeration) - Specified if the transaction is a sale or return
 + ControlTotal: 12345.67 (optional) - Control total at the time of this transaction (including this transaction).
@@ -975,7 +973,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Generic Id
 + Include Sequence Number
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ IsOnline: true - Indicates whether or not the transaction performed online.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
 + TransactionType (Attended Event Transaction Type Enumeration) - The type of attendence transaction.
 + EventNumber: 1 - The number of the event.
@@ -984,7 +981,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Board Element (object)
 + TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ IsOnline: true - Indicates whether or not the transaction performed online.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
 + MealTypeId: 1
 + IsGuestMeal: false
@@ -1033,7 +1029,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
         + SignOff
 
 ## Line Item Base (object)
-+ Include Transaction Id
 + Include Line Item Sequence Number
 + VoidFlag: false - Indiciated whether or not this line item was void.
 
@@ -1055,8 +1050,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ExtendedDiscountAmount: 0.0 - Extended Discount Amount
 + ProductEntryMethodType (Product Entry Method Type Enumeration) - Product Entry Method Type
 + RetailPriceEntryMethodType (Retail Price Entry Method Type Enumeration) - Retail Price Entry Method Type
-+ UnitCostPrice: 0.0 - Unit Cost Price
-+ UnitCostPriceQuantity: 1 - Unit Cost Price Quantity
 + UnitListPrice: 0.0 - Unit List Price
 + UnitListPriceQuantity: 1 - Unit List Price Quantity
 + ProductPromotionFlag: false - Product Promotion Flag
