@@ -306,6 +306,209 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Healthcheck Response)
     
 
+# Group Security
+    
+## Security Management [/security]
+
+### Door States Get All [GET /transact/api/security/doors/state]
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door States Get Response)
+   
+### Door States Get [GET /transact/api/security/doors/{DoorId}/state]
++ Attributes
+    + DoorId: 11 - The unique identifier for the door.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door States Get Response)
+    
+### Door Alarms Get All [GET /transact/api/security/doors/alarm?startDate={StartDate}&endDate={EndDate}]
++ Attributes
+    + StartDate: `2012-04-23` (string) - Optional Start Date.
+    + EndDate: `2012-04-30` (string) - Optional End Date.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Alarms Get Response)
+    
+
+### Door Alarms Get [GET /transact/api/security/doors/{DoorId}/alarm?startDate={StartDate}&endDate={EndDate}]
++ Attributes
+    + DoorId: 11 - The unique identifier for the door.
+    + StartDate: `2012-04-23` (string) - Optional Start Date.
+    + EndDate: `2012-04-30` (string) - Optional End Date.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Alarms Get Response)
+    
+### Active Door Alarms Get [GET /transact/api/security/doors/alarm/active]
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Alarms Get Response)
+    
+### Doors by Cardholder Get [GET /transact/api/security/doors/users/{CardHolder}?accessPlanActive={AccessPlanActive}]
++ Attributes
+    + CardHolder: 11 - Either CustomerId or CustomerGuid can be used as CardHolder.
+    + AccessPlanActive: `true` (boolean) - Optional Access plan active filter.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (User Doors Get Response)
+    
+### Users by Door Get [GET /transact/api/security/doors/{doorId}/users?accessPlanActive={AccessPlanActive}&customerActive={CustomerActive}]
++ Attributes
+    + DoorId: 11 - Door Id.
+    + AccessPlanActive: true (boolean) - Optional Access plan active filter.
+    + CustomerActive: true (boolean) - Optional Customer active filter.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Users Get Response)
+    
+### Door Transaction by Cardholder Get [GET /transact/api/security/doors/users/{CardHolder}/history/transactions?startDate={StartDate}&endDate={EndDate}]
++ Attributes
+    + CardHolder: 11 - Either CustomerId or CustomerGuid can be used as CardHolder.
+    + StartDate: `2012-04-23` (string) - Optional Start Date.
+    + EndDate: `2012-04-30` (string) - Optional End Date.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Transaction Get Response)
+    
+### Door Transaction by Door Get [GET /transact/api/security/doors/{DoorId}/history/transactions?startDate={StartDate}&endDate={EndDate}]
++ Attributes
+    + DoorId: 11 - Door Id.
+    + StartDate: `2012-04-23` (string) - Optional Start Date.
+    + EndDate: `2012-04-30` (string) - Optional End Date.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Transaction Get Response)
+    
+### Door Transaction by Building Get [GET /transact/api/security/doors/buildings/{BuildingId}/history/transactions?startDate={StartDate}&endDate={EndDate}]
++ Attributes
+    + BuildingId: 11 - Building Id.
+    + StartDate: `2012-04-23` (string) - Optional Start Date.
+    + EndDate: `2012-04-30` (string) - Optional End Date.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Transaction Get Response)
+    
+### Door History Get [GET /transact/api/security/doors/{DoorId}/history/states?startDate={StartDate}&endDate={EndDate}]
++ Attributes
+    + DoorId: 11 - Door Id.
+    + StartDate: `2012-04-23` (string) - Optional Start Date.
+    + EndDate: `2012-04-30` (string) - Optional End Date.
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door History Get Response)
+    
+### Master Controller Set [POST /transact/api/security/masterControllers/{MasterControllerId}]
++ Attributes
+    + MasterControllerId: 11 - Optional Master controller Id.
+    
++ Request (application/json)
+    + Attributes (Master Controller Post Request)
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Master Controller Post Response)
+
++ Response 400 (application/json)
+    - Response code 400 is returned if there is a problem with any of the request parameters.
+    + Attributes (Response 400 Error)
+    
+### Door Set [POST /transact/api/security/doors/{DoorId}]
++ Attributes
+    + DoorId: 11 - Optional Door Id.
+    
++ Request (application/json)
+    + Attributes (Door Post Request)
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Post Response)
+
++ Response 400 (application/json)
+    - Response code 400 is returned if there is a problem with any of the request parameters.
+    + Attributes (Response 400 Error)
+    
+### Door State Change [POST /transact/api/security/doors/state/override]
++ Request (application/json)
+    + Attributes (Door State Change Post Request)
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door State Change Post Response)
+
++ Response 400 (application/json)
+    - Response code 400 is returned if there is a problem with any of the request parameters.
+    + Attributes (Response 400 Error)
+    
+### Acknowledge All Alarms [POST /transact/api/security/doors/alarm/close]
++ Request (application/json)
+    + Attributes (Acknowledge Alarm Post Request)
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Acknowledge Alarm Post Response)
+
++ Response 400 (application/json)
+    - Response code 400 is returned if there is a problem with any of the request parameters.
+    + Attributes (Response 400 Error)
+    
+### Acknowledge Door Alarms [POST /transact/api/security/doors/{DoorId}/alarm/close]
++ Attributes
+    + DoorId: 11 - Door Id.
+    
++ Request (application/json)
+    + Attributes (Acknowledge Alarm Post Request)
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Acknowledge Alarm Post Response)
+
++ Response 400 (application/json)
+    - Response code 400 is returned if there is a problem with any of the request parameters.
+    + Attributes (Response 400 Error)
+    
+
 # Group Transaction
 
 ## Transaction Processing [/transaction]
@@ -335,6 +538,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Base objects section (object) - do not use; for documentation only
 + x: `************************************************************************************************`
 
+
+## Acknowledge Info Base (object)
++ UserName: E (string) - Username of person acknowledging alarm.
++ AckowledgeAllPrevious: true (boolean) - T means the user choose to automatically acknowledge all previous open alarms.
++ Note: Everything is OK (string) - Text of the Acknowledgment.
 
 ## Balance Board Base (object)
 + BoardPlanId: 1 (string) - The identifier for the board plan.
@@ -616,6 +824,106 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Properties (Device Properties Base) - Device properties.
 + PosCredentialSettings (Pos Credential Settings Base) - Pos credential settings.
 
+## Door Activity Base (object)
++ TransactionType: Door Event (string) - Transaction Type.
++ EventLogId: 1501 (number) - (Nullable) Event log Id.
++ McTransactionSequenceNumber: 57 (number) - (Nullable) MC transaction sequence number.
++ ActualDateTime: `2018-01-04T00:00:00+01:00` (string) - (Nullable) Actual date time.
++ DoorIdentifier: Edited Doo (string) - Door identifier.
++ MerchantId: 8 (number) - Merchant Id.
++ BuildingName: `<NONE>` (string) - Building name.
++ AreaName: `<NONE>` (string) - Area name.
++ Description: `Door State: [Unlocked]` (string) - Description.
+
+## Door Alarm Log Base (object)
++ LogId: 2795 (number) - Door Access Door Alarm Log Identifier.
++ ComputerId: 1 (number) - (Nullable) Computer Association.
++ DoorId: 11 (number) - Door Association.
++ DoorAlarmType (Door Alarm Log Type Enumeration) - Door alarm type.
++ StartMcTransEqNum: 0 (number) - The Master Controller Transaction Sequence Number as of the Alarm Start.
++ StartActualDateTime: `2012-04-23T00:00:00+02:00` (string) - The Master Controller's DateTime as of the Alarm Start.
++ StartIsOnline: true (boolean) - 'T' means the MasterController was Online when this Alarm started on the MasterController.
++ StartPostDateTime: `2012-04-23T00:00:00+02:00` (string) - The Database's DateTime as of when it INSERTED the Alarm record.
++ IsActive: true (boolean) - Indicator as to whether the alarm log entry is active.
++ StopMcTransEqNum: 0 (number) - (Nullable) The Master Controller Transaction Sequence Number as of the Alarm Stop.
++ StopActualDateTime: `2012-04-23T00:00:00+02:00` (string) - (Nullable) The Master Controller's DateTime as of the Alarm Stop.
++ StopIsOnline: true (boolean) - (Nullable) 'T' means the MasterController was Online when this Alarm stopped on the MasterController.
++ StopPostDateTime: `2012-04-23T00:00:00+02:00` (string) - (Nullable) The Database's DateTime as of when it Updated the alarm record as stopped.
++ MasterControllerId: 1 (number) - (Nullable) Master Controller Association
++ IsAcked: true (boolean) - T means this alarm record was Acknowledged.
++ DoorAlarmAckInfoId: 188 (number) - (Nullable) The associated Ack Note.
++ DomainId: `987fa969-5e29-4c77-bce8-2034ed307b39` (string) - Globally unique identity for this record.
+
+## Door Base (object)
++ Id: 11 (number) - Door Identifier.
++ MasterControllerId: 1 (number) - (Nullable) Master Controller that this Door's Door Controller is connected to.
++ Address: 1 (number) - (Nullable) Address 0..7.  This tells the Master Controller which door it is talking to.
++ MerchantId: 8 (number) - Merchant Association.
++ DoorIdentifier: Edited Door (string) - Identifier unique by Merchant.
++ Description: Edited door (string) - Text description of Door.
++ BuildingId: 1 (number) - (Nullable) Building Association.
++ AreaId: 1 (number) - (Nullable) Building Area Association.
++ DoorGroupId: 1 (number) - (Nullable) The Door Group that this door belongs to (NULL mean none).
++ UseDoorDefault: true (boolean) - 'T' means use the Settings from DA_DOOR_DEFAULT.
++ DoorUnlockSeconds: 10 (number) - 1..255 seconds.
++ MinSirenSeconds: 10 (number) - 1..255 seconds.
++ HeldAlarmType (Door Alarm Type Enumeration) - A held alarm is when the door is open longer than HeldAlarmDelayTimeSeconds.
++ HeldAlarmDelayTimeSeconds: 10 (number) - 1..255 seconds.
++ ForceAlarmType (Door Alarm Type Enumeration) -  A force alarm is defined as a door detected as open (door contacts are separated).
++ ForceAlarmDelayTimeSeconds: 10 (number) - 1..255 seconds.
++ UseDoorDefaultSchedule: false (boolean) - 'T' means use the SCHEDULE_ID from DA_DOOR_DEFAULT.
++ ScheduleId: 1 (number) - (Nullable) If USE_DEFAULT_SCHEDULE != 'T' then this will be the Door State Schedule.
++ OfflineOperationType (Door Offline Operation Type Enumeration) - Offline operation type.
++ AlarmInstruction: F.E.A.R (string) - Instructions that the Door Access Monitor is shown for any alarm at this Door.
+        
+## Door Event Log Base (object)
++ LogId: 2795 (number) - Door Event Log Identifier.
++ ComputerId: 1 (number) - (Nullable) Computer Association.
++ DoorId: 11 (number) - Door Association.
++ McTransactionSequenceNumber: 129 (number) - Transaction Sequence Number from the MasterController.
++ IsOnline: false (boolean) -  True if StatusChange occured Online.
++ ActualDateTime: `2018-01-04T00:00:00+01:00` (string) - DateTime that this data was generated according to the Device.
++ PostDateTime: `2018-01-04T00:00:00+01:00` (string) - DateTime that this data was inserted into the table according to the DB's clock.
++ DoorControlMode (Door Control Mode Enumeration) - Door control mode.
++ IsExitCycle: false (boolean) - Is exit cycle.
++ IsUnlocked: false (boolean) - Is unlocked.
++ IsOpen: false (boolean) - Is open.
++ IsHeld: false (boolean) - Is held.
++ IsForced: false (boolean) - Is forced.
++ IsTampered: false (boolean) - Is tampered.
++ RequiresPin: false (boolean) - Requires pin.
++ DoorControlCommLost: false (boolean) - Door Controller Communication Lost.
++ Tb1AuxCsTamper: false (boolean) - TB1 (Proximity Reader) Auxillary Cardswipe Tamper.
++ Tb2AuxCsTamper: false (boolean) - TB2 (Proximity Reader) Auxillary Cardswipe Tamper.
++ Serial1CsCommLost: false (boolean) - Serial Port 1 Cardswipe Communication Lost.
++ Serial2CsCommLost: false (boolean) - Serial Port 2 Cardswipe Communication Lost.
++ DoorControlAcPowerFail: false (boolean) - Door Controller AC Power Failed.
++ DoorControlBatteryLow: false (boolean) - Door Controller Battery Low.
++ OverrideStatus (Door Override Status Enumeration) - Door Override status - relates to door control state.
++ MasterControllerId: 28 (number) - (Nullable) Master controller id.
+
+## Door Transaction Base (object)
++ TransactionId: 21 (number) - Transaction Id.
++ McTransactionSequenceNumber: 70 (number) - Transaction Sequence Number from the MasterController.
++ IsOnline: true (boolean) - T means Online.
++ ValidationType (Door Transaction Validation Type Enumeration) - Validation type.
++ ActualDateTime: `2018-01-04T00:00:00+01:00` (string) - DateTime that this data was generated according to the Device.
++ PostDateTime: `2009-06-11T13:25:10.597+02:00` (string) - DateTime that this data was inserted into the table according to the DB's clock.
++ TenderTypeId: 1 (number) - Tender type Id.
++ DoorId: 28 (number) - Door Id.
++ CustomerIdentificationType (Customer Identification Type Enumeration) - Customer identification type.
++ CustomerId: 81 (number) - (Nullable) Customer Id.
++ MasterControllerid: 22 (number) - (Nullable) Master controller Id.
++ HostComputerId: 1 (number) - (Nullable) Host computer Id.
++ TransactionType: Door Accepted Transaction (string) - Transaction Type.
+            
+## Door User Base (object)
++ Include Schedule Base
++ Include Customer Guid
++ CustomerId: 1 (number) - Customer Id.
++ CustomerNumber: 600001 (number) - Customer number.
++ CustomerActive: true (boolean) - Customer Active.
+
 ## Encoded Image (object)
 + Image: `base64encoded string` (string) - The image as a base 64 encoded string.
 + MimeType (enum) - The image type.
@@ -704,6 +1012,22 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + EventId: 17 - The Event ID that would be used in the event a message is written to the event log.
 + EventCategory: 0 - The Event Category that would be used in the event a message is written to the event log.  0 means success.
 
+## Master Controller Base (object)
++ Id: 4118 (number) - Master Controller Id.
++ Name: New Master Controller (string) - Name of Master Controller.
++ AbbreviatedName: NMC (string) - Short Name of Master Controller.
++ MultiplexorEnabled: true (boolean) - Tells MasterController whether to attempt to communicate with the MUX boards.
++ PinpadEnabled: true (boolean) - T means SA20xxxx mastercontroller has PINPAD device attached.
++ DoorAccessDownloadScheduleId: 2 (number) - Door access download schedule Id.
++ HardwareModel: 1 (number) - Door Harware Model.
++ CommunicationType: 0 (number) - Door Communication Type.
++ IsActive: true (boolean) - T reader is active in TS.
++ MacAddress: `12-34-56-78-90-AB` (string) - Used for Network CommunicationType only. Formatted as '01-23-45-67-89-AB'.
++ ConnectionId: 4 (number) - (Nullable) Used for Network CommunicationType only. ConnectionID used for communicaiton.
++ IpConverterId: 1 (number) - (Nullable) Used for IP Converter CommunicationType only. ID of IP Converter.
++ IpConverterAddress: 18 (number) - (Nullable) Used for IP Converter CommunicationType only. RS-485 address within IP Converter to use
++ DownloadType: 1 (number) - (Nullable) Offline table download calculation method for MasterController
+    
 ## Meals Count Report Base (object)
 + BoardPeriod: 3 (number) - Current board period number.
 + BoardPeriodName: `tb3b-lunch` (string) - Current board period name.
@@ -737,6 +1061,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + OverrideKeys (Override Keys Base)
 
 ## Operator Session Base (object)
++ Include Operator Guid
 + SessionId: `817c6232-d354-4994-b37a-38f928d1c5ec` (string) - Session GUID.
 + StartDateTime: `2009-01-30T15:53:13.328+01:00` (string) - Session start date.
 + EndDateTime: `2018-01-13T16:15:40.352+01:00` (string) - Session end date.
@@ -857,6 +1182,27 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RoleId: `065dfe36-7694-4571-b86c-d9bedacdbf77`(string) - Unique identifier for the role.
 + Rights (array[Rights Enumeration]) - List of rights assigned to the role.
 
+## Schedule Base (object)
++ ScheduleId: 24 (number) - Schedule Id.
++ ScheduleName: mp perm schedule 1 (string) - Schedule name.
++ HolidayScheduleId: 1 (number) - (Nullable) Holiday schedule Id.
++ HolidayScheduleName: Holiday (string) - Holiday schedule name.
++ Dow1ScheduleId: 23 (number) - Schedule id for day of week 1.
++ Dow1ScheduleName: mp merch perm day template 1 (string) - Schedule name for day of week 1.
++ Dow2ScheduleId: 23 (number) - Schedule id for day of week 2.
++ Dow2ScheduleName: mp merch perm day template 1 (string) - Schedule name for day of week 2.
++ Dow3ScheduleId: 23 (number) - Schedule id for day of week 3.
++ Dow3ScheduleName: mp merch perm day template 1 (string) - Schedule name for day of week 3.
++ Dow4ScheduleId: 23 (number) - Schedule id for day of week 4.
++ Dow4ScheduleName: mp merch perm day template 1 (string) - Schedule name for day of week 4.
++ Dow5ScheduleId: 23 (number) - Schedule id for day of week 5.
++ Dow5ScheduleName: mp merch perm day template 1 (string) - Schedule name for day of week 5.
++ Dow6ScheduleId: 23 (number) - Schedule id for day of week 6.
++ Dow6ScheduleName: mp merch perm day template 1 (string) - Schedule name for day of week 6.
++ Dow7ScheduleId: 23 (number) - Schedule id for day of week 7.
++ Dow7ScheduleName: mp merch perm day template 1 (string) - Schedule name for day of week 7.
++ AccessPlanActive: true (boolean) - Access plan active.
+
 ## Stored Value Account Base (object)
 + TypeId: 1 (number) - The identifier for the type of stored value account.
 + Name: MySvAccount (string) - The name for the stored value account.
@@ -893,6 +1239,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Type: Cash (Tender Type Enumeration) - The type of tender.
 + ShortName: cpcash1tt (string) - The shortened name for the tender.
 + RoundingIncrement: 0.05 (number) - The increment in which cash is rounded for countries where that is applicable.
+
+## User Door Base (object)
++ Include Schedule Base
++ DoorId: 11 (number) - Door Id.
++ DoorIdentifier: Edited Doo (string) - Door identifier.
 
 ## Transaction related objects section do not use for documentation (object)
 + x: `----------------------------------------------------------------------------------------------------`
@@ -1314,6 +1665,49 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + CurrentDate: `2017-10-10 13:11:23` (string) - Current Date.
 + Include Report Base
 
+## Acknowledge Alarm Post Request (object)
++ Include Request Id
++ AcknowledgeInfo (Acknowledge Info Base)
+
+## Acknowledge Alarm Post Response (object)
++ Include Request Id
++ AcknowledgeInfo (Acknowledge Info Base)
+
+## Door Alarms Get Response (object)
++ DoorAlarmLogs (array[Door Alarm Log Base])
+
+## Door History Get Response (object)
++ DoorActivities (array[Door Activity Base])
+
+## Door Post Request (object)
++ Include Request Id
++ Door (Door Base)
+
+## Door Post Response (object)
++ Include Request Id
++ Door (Door Base)
+
+## Door State Change Post Request (object)
++ Include Request Id
++ DoorIds (array[number]) - The numerical identifier for the door.
++ AuditLogMessage: Message (string) - Optional audit message.  Leave blank or null to omit audit log message.
++ StateOverrideValue (Door State Change State Override Values Enumeration) - The new state to change the door to.
++ DurationOverrideValue (Door State Change Duration Override Value Enumeration) - The duration to maintain the state override.
+
+## Door State Change Post Response (object)
++ Include Request Id
++ HostResponseMessages (array[NameValuePair])
+
+## Door States Get Response (object)
++ DoorStates (array[Door Event Log Base])
+
+## Door Users Get Response (object)
++ DoorId: 11 (number) - Door Id.
++ UserDoors (array[Door User Base])
+
+## Door Transaction Get Response (object)
++ DoorTransactions (array[Door Transaction Base])
+
 ## Drawer Audit Get Response (object)
 + CashierName: `Cashier Martin 1111 (101)` (string) - Name of the cashier.
 + CashDrawerNumber: 1 (number) - Cash Drawer.
@@ -1359,6 +1753,14 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Event Log Set Response (object)
 + Request (Event Log Set Request) - Requested that spawned this response.
 
+## Master Controller Post Request (object)
++ Include Request Id
++ MasterController (Master Controller Base)
+
+## Master Controller Post Response (object)
++ Include Request Id
++ MasterController (Master Controller Base)
+
 ## Meal Count Report Get Response (object)
 + MealsCountReport (Meals Count Report Base)
 
@@ -1394,6 +1796,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + DeniedText: Success - The error message corresponding to the results of the post operation.
 + ArtsTransactionProcessingResultSet (Transaction Result Set Arts Base) - The results of any arts transactions that might have occured.
 + BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occured.
+
+## User Doors Get Response (object)
++ CustomerId: 1 (number) - Customer Id.
++ UserDoors (array[User Door Base])
 
 ## Common Base Types Section (object) - do not use for documentation
 + x: `**********************************************************************************`
@@ -1526,6 +1932,58 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Complete: Finished at the originator.
 + Accepted: Finished at originator, and accepted by host/api/db.
 + Rejected: Finished at originator, but rejected by host/api/db
+
+## Door Alarm Log Type Enumeration (enum)
++ HeldOpen
++ ForcedOpen
++ Tampered
++ CommLost
++ Tb1AuxCsTamper
++ Tb2AuxCsTamper
++ Serial1CsCommLost
++ Serial2CsCommLost
++ AcPowerFail
++ BatteryLow
+
+## Door Alarm Type Enumeration (enum)
++ Disabled - No alarm is sent to the DA Host and no siren sounds.
++ Silent - An alarm is sent to the DA Host after the held alarm delay time has expired.
++ Siren - Siren sounds after the held alarm delay time has expired.
+
+## Door Control Mode Enumeration (enum)
++ Controlled
++ Unlocked
++ Locked
++ MomentaryUnlocked
+
+## Door Offline Operation Type Enumeration (enum)
++ SiteCodeCheckOnly
++ OnlineEnumeration
++ NoAccess
+        
+## Door Override Status Enumeration (enum)
++ AsScheduled
++ IndefinateOverride
++ SpanOverride
+
+## Door State Change Duration Override Value Enumeration (enum)
++ Schedule
++ Cancelled
+
+## Door State Change State Override Values Enumeration (enum)
++ Undefined
++ Unlocked
++ Locked
++ Controlled
++ RequirePin
+
+## Door Transaction Validation Type Enumeration (enum)
++ AcceptedOnline
++ AcceptedOffline
+
+## Customer Identification Type Enumeration (enum)
++ CardNumber
++ FutureFeature
 
 ## Line Item Type Enumeration (enum)
 + LineItemUndefined - An undefined line item type.
