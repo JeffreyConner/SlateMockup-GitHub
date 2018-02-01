@@ -429,6 +429,13 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door History Get Response)
     
+### Door Get All [GET /transact/api/security/doors]
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Door Get Response)
+    
 ### Master Controller Set [POST /transact/api/security/masterControllers/{MasterControllerId}]
 + Attributes
     + MasterControllerId: 11 - Optional Master controller Id.
@@ -854,26 +861,29 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + DoorAlarmAckInfoId: 188 (number) - (Nullable) The associated Ack Note.
 + DomainId: `987fa969-5e29-4c77-bce8-2034ed307b39` (string) - Globally unique identity for this record.
 
+## Door (object)
++ Include Door Base
++ Address: 1 (number) - (Nullable) Address 0..7.  This tells the Master Controller which door it is talking to.
++ UseDoorDefault: true (boolean) - 'T' means use the Settings from DA_DOOR_DEFAULT.
++ UseDoorDefaultSchedule: false (boolean) - 'T' means use the SCHEDULE_ID from DA_DOOR_DEFAULT.
++ OfflineOperationType (Door Offline Operation Type Enumeration) - Offline operation type.
+
 ## Door Base (object)
 + Id: 11 (number) - Door Identifier.
 + MasterControllerId: 1 (number) - (Nullable) Master Controller that this Door's Door Controller is connected to.
-+ Address: 1 (number) - (Nullable) Address 0..7.  This tells the Master Controller which door it is talking to.
 + MerchantId: 8 (number) - Merchant Association.
 + DoorIdentifier: Edited Door (string) - Identifier unique by Merchant.
 + Description: Edited door (string) - Text description of Door.
 + BuildingId: 1 (number) - (Nullable) Building Association.
 + AreaId: 1 (number) - (Nullable) Building Area Association.
 + DoorGroupId: 1 (number) - (Nullable) The Door Group that this door belongs to (NULL mean none).
-+ UseDoorDefault: true (boolean) - 'T' means use the Settings from DA_DOOR_DEFAULT.
 + DoorUnlockSeconds: 10 (number) - 1..255 seconds.
 + MinSirenSeconds: 10 (number) - 1..255 seconds.
 + HeldAlarmType (Door Alarm Type Enumeration) - A held alarm is when the door is open longer than HeldAlarmDelayTimeSeconds.
 + HeldAlarmDelayTimeSeconds: 10 (number) - 1..255 seconds.
 + ForceAlarmType (Door Alarm Type Enumeration) -  A force alarm is defined as a door detected as open (door contacts are separated).
 + ForceAlarmDelayTimeSeconds: 10 (number) - 1..255 seconds.
-+ UseDoorDefaultSchedule: false (boolean) - 'T' means use the SCHEDULE_ID from DA_DOOR_DEFAULT.
 + ScheduleId: 1 (number) - (Nullable) If USE_DEFAULT_SCHEDULE != 'T' then this will be the Door State Schedule.
-+ OfflineOperationType (Door Offline Operation Type Enumeration) - Offline operation type.
 + AlarmInstruction: F.E.A.R (string) - Instructions that the Door Access Monitor is shown for any alarm at this Door.
         
 ## Door Event Log Base (object)
@@ -1676,12 +1686,15 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Door Alarms Get Response (object)
 + DoorAlarmLogs (array[Door Alarm Log Base])
 
+## Door Get Response (object)
++ Doors (array[Door Base])
+
 ## Door History Get Response (object)
 + DoorActivities (array[Door Activity Base])
 
 ## Door Post Request (object)
 + Include Request Id
-+ Door (Door Base)
++ Door (Door)
 
 ## Door Post Response (object)
 + Include Request Id
