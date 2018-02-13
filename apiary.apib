@@ -166,7 +166,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Operator Management [/operator]
 
-### Operator Session Begin [POST /transact/api/operator/session/begin]
+### Operator Session Begin/End [POST /transact/api/transaction]
 + Request (application/json)
     + Attributes (Operator Session Begin Request)
     
@@ -174,26 +174,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Headers
     
             Content-Type: application/json; charset=UTF-8
-    + Attributes (Operator Session Begin Response)
+    + Attributes (Transaction Post Response)
 
 + Response 400 (application/json)
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
-
-### Operator Session End [POST /transact/api/operator/session/end]
-+ Request (application/json)
-    + Attributes (Operator Session End Request)
-    
-+ Response 200
-    + Headers
-    
-            Content-Type: application/json; charset=UTF-8
-    + Attributes (Operator Session End Response)
-
-+ Response 400 (application/json)
-    - Response code 400 is returned if there is a problem with any of the request parameters.
-    + Attributes (Response 400 Error)
-
 
 ### Operator PIN Change [PUT /transact/api/operator/pinchange]
 + Request (application/json)
@@ -1807,8 +1792,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Request Id
 + ErrorCode: 0 - The error code corresponding to the results of the post operation.
 + DeniedText: Success - The error message corresponding to the results of the post operation.
-+ ArtsTransactionProcessingResultSet (Transaction Result Set Arts Base) - The results of any arts transactions that might have occured.
-+ BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occured.
++ ControlTransactionProcessingResult (Processing Result Response) - The results of any control transaction that might have occurred.
++ ArtsTransactionProcessingResultSet (Transaction Result Set Arts Base) - The results of any arts transactions that might have occurred.
++ BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occurred.
++ BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occurred.
 
 ## User Doors Get Response (object)
 + CustomerId: 1 (number) - Customer Id.
