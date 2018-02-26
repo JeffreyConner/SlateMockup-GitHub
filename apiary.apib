@@ -168,7 +168,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ### Operator Session Begin/End [POST /transact/api/transaction]
 + Request (application/json)
-    + Attributes (Operator Session Begin Request)
+    + Attributes (Operator Session Request)
     
 + Response 200
     + Headers
@@ -1138,7 +1138,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ProductDetailId: 1 (number) - The product detail id.
 + ProductNumber: somenumber (string) - The product number.
 + ProductDescription: somedescription (string) - The description of the product.
-+ ProductType(Product Type Enumeration) - The product type.
++ ProductType: PromptForPrice (Product Type Enumeration) - The product type.
 + TaxScheduleId: 1 (number) - The id of the tax schedule associated with this product.
 + TaxGroupId: 1 (number) - The id of the tax group this product belongs to.
 + RetailPrice: 1.00 (number) - The retail price of the product.
@@ -1231,7 +1231,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Tax Tender Base (object)
 + TenderId: 1 (number) - The tender id.
 + TaxScheduleId: 1 (number) - The numeric identifier for the tax schedule this tax tender is assigned to.
-+ TaxRate: 0.0998 (number) - Tax rate.  (If 9.98% tax rate, TaxPercent == 0.0998m)
++ TaxRate: 0.0998 (number) - Tax rate.  (If 9.98% tax rate, TaxRate == 0.0998m)
 
 ## Tender Base (object)
 + Id: 4 (number) - The identifier of the tender
@@ -1250,37 +1250,25 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Transaction Base (object)
 + Include Generic Id
-+ Disposition (Disposition Enumeration) - The state of the transaction.
-+ ForcePost: false - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
++ Disposition: Complete (Disposition Enumeration) - The state of the transaction.
++ ForcePost: false (boolean) - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
 + TransactionTimestamps (array[Transaction Timestamp Base]) - Collection of timestamps associated with the transaction.
 + OriginatorElement (Originator Element) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
 + OperatorElement (Operator Element) - Inherited element required in the elements part of a transaction to denote who performed the transaction (the operator or cashier).
-+ ControlElement - Inherited element required in the elements part of a transaction to promote operator control information.  Null for Board and Arts transactions.
++ ControlElement (Control Element) - Inherited element required in the elements part of a transaction to promote operator control information.  Null for Board and Arts transactions.
 + ArtsTransactions (array[Arts Transaction Element]) - List of all arts transactions included in the parent transaction.
 + BoardTransactions (array[Board Element]) - List of all board included in the parent transaction.
 + AttendenceTransactions (array[Attendance Element]) - List of all attendence event transactions included in the parent transaction.
 + NameValues (array[Name Value Pair]) - List of key value properties.
 
-## Operator Session Begin Base (object)
+## Operator Session (object)
 + Include Generic Id
-+ Disposition (Disposition Enumeration) - The state of the transaction.
-+ ForcePost: false - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
++ Disposition: Complete (Disposition Enumeration) - The state of the transaction.
++ ForcePost: false (boolean) - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
 + TransactionTimestamps (array[Transaction Timestamp Base]) - Collection of timestamps associated with the transaction.
 + OriginatorElement (Originator Element) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
 + OperatorElement (Operator Element) - Inherited element required in the elements part of a transaction to denote who performed the transaction (the operator or cashier).
-+ ControlElement (Control Element Session Begin) - Inherited element required in the elements part of a transaction to promote operator control information.
-+ ArtsTransactions (array) - List of all arts transactions included in the parent transaction.
-+ BoardTransactions (array) - List of all board included in the parent transaction.
-+ NameValues (array[Name Value Pair]) - List of key value properties.
-
-## Operator Session End Base (object)
-+ Include Generic Id
-+ Disposition (Disposition Enumeration) - The state of the transaction.
-+ ForcePost: false - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
-+ TransactionTimestamps (array[Transaction Timestamp Base]) - Collection of timestamps associated with the transaction.
-+ OriginatorElement (Originator Element) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
-+ OperatorElement (Operator Element) - Inherited element required in the elements part of a transaction to denote who performed the transaction (the operator or cashier).
-+ ControlElement (Control Element Session End) - Inherited element required in the elements part of a transaction to promote operator control information.
++ ControlElement (Control Element) - Inherited element required in the elements part of a transaction to promote operator control information.
 + ArtsTransactions (array) - List of all arts transactions included in the parent transaction.
 + BoardTransactions (array) - List of all board included in the parent transaction.
 + NameValues (array[Name Value Pair]) - List of key value properties.
@@ -1289,27 +1277,24 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Originator Id
 + Include Generic Id
 + Include Sequence Number
-+ Type (Originator Type Enumeration) - The type of originator where the transaction was performed at.
-+ AttendType (Attend Type Enumeration) - Indicated the level of interation with an operator.
++ Type: PR5000 (Originator Type Enumeration) - The type of originator where the transaction was performed at.
++ AttendType: Attended (Attend Type Enumeration) - Indicated the level of interation with an operator.
 
 ## Operator Element (object)
 + Include Operator Guid
 + Include Generic Id
 + Include Sequence Number
-+ OperatorMode (Cashier Mode Enumeration) - The level of rights the operator was operating under.
++ OperatorMode: Standard (Cashier Mode Enumeration) - The level of rights the operator was operating under.
 + Include Session Id
-+ CashDrawerNumber: 1 - The drawer the cashier is operating out of.
-+ ControlTotal - Nullable value denoting the current control total on the device.
++ CashDrawerNumber: CashDrawer1 (Cash Drawer Number Enumeration) - The drawer the cashier is operating out of.
 
 ## Arts Transaction Element (object)
 + Include Generic Id
 + Include Sequence Number
-+ TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ CancelledFlag: false - True if this transaction is a cancelled transaction.
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
++ CancelledFlag: false (boolean) - True if this transaction is a cancelled transaction.
 + ValidationType: AcceptedOffline (Validation Type Enumeration) - Specified if the transaction was accepted or denied while online or offline.
 + TranType: Sale (Transaction Type Enumeration) - Specified if the transaction is a sale or return
-+ ControlTotal: 12345.67 (optional) - Control total at the time of this transaction (including this transaction).
-+ ChangeInControlTotal: 12345.67 (optional) - The change in control total resulting from this transaction.  This should never be negative.
 + ControlTotalBeforeTransaction: 12345.67 (optional) - Control total immediately prior to this transaction -- Required for MF4100, Slate, and Cash Register device types.
 + ControlTotalAfterTransaction: 12345.67 (optional) - Control total immediately after this transaction -- Required for MF4100, Slate, and Cash Register device types.
 + LineItemProducts (array[Line Item Product]) - All of the products included in the arts transactions.  Empty set if there aren't any.
@@ -1320,25 +1305,24 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemTenders (array[Line Item Tender Base]) - Tenders used during the transaction.
 
 ## Attendance Element (object)
-+ Include Transaction Id
 + Include Generic Id
 + Include Sequence Number
-+ TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
-+ TransactionType (Attended Event Transaction Type Enumeration) - The type of attendence transaction.
-+ EventNumber: 1 - The number of the event.
++ TransactionType: RegularEntry (Attended Event Transaction Type Enumeration) - The type of attendence transaction.
++ EventNumber: 1 (number) - The number of the event.
 + Include Customer Guid
 
 
 ## Board Element (object)
-+ TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
-+ MealTypeId: 1
-+ IsGuestMeal: false
-+ CountUsed: 1
-+ EntryMethodType: ManuallyEntered (Retail Price Entry Method Type Enumeration) - Product Entry Method Type
++ MealTypeId: 1 (number)
++ IsGuestMeal: false (boolean) - True if this is a guest meal.
++ CountUsed: 1 (number) - Number of board counts to use.
++ EntryMethodType: ManuallyEntered (Entry Method Type Enumeration) - The method used to capture the customer's credentials.
 + Include Generic Id
-+ Sequence: 3
++ Include Sequence Number
 
 ## Board Processing Result (object)
 + Include Request Id
@@ -1357,84 +1341,72 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TransferLeft: 0 - Transfer meals left
 + TypeUsed: 1 (Board Meal Type Used Enumeration) - Meal Type used.
 
-## Control Element Session Begin (object)
-+ TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ IsOnline: true - Indicated whether or not the device was online when the control operation occured.
+## Control Element (object)
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
 + Include Session Id
 + Include Generic Id
 + Include Sequence Number
-+ ControlType: SignOn (enum) - Not currently checked but left in for future functionality.
-    + Members
-        + SignOn
-        + SignOff
-        
-## Control Element Session End (object)
-+ TransactionNumber: 123456 - The numerical value assigned to the transaction to assist in failover detection.
-+ IsOnline: true - Indicated whether or not the device was online when the control operation occured.
-+ Include Session Id
-+ Include Generic Id
-+ Include Sequence Number
-+ ControlType: SignOff (enum) - Not currently checked but left in for future functionality.
++ ControlType: SignOn (enum) - Specifies login or logout.
     + Members
         + SignOn
         + SignOff
 
 ## Line Item Base (object)
 + Include Line Item Sequence Number
-+ VoidFlag: false - Indiciated whether or not this line item was void.
++ VoidFlag: false (boolean) - Indiciated whether or not this line item was void.
 
 ## Line Item Product (object) - A line item describing a product being sold.
-+ ProductDetailId: 1 - Product Detail Id.
-+ ProductDescription: Some description - Product description.
-+ TaxScheduleId: 1 - Tax Schedule Id.
-+ TaxAccountName: MF4100 NoTax Acct - Tax Account Name
-+ TaxGroupId: 1 - Tax Group Id.
-+ RetailPrice: 0.0 - Retail Price.
-+ RetailPriceQuantity: 1 - Retail Price Quantity
-+ ActualUnitPrice: 37.83 - Actual Unit Price
-+ ActualUnitPriceQuantity: 1 - Actual Unit Price Quantity
-+ Quantity: 1 - Quantity
-+ Units: 1 - Units
-+ UnitMeasureType (Unit Measure Type Enumeration) - Unit Measure Type
-+ ExtendedAmount: 37.83 - Extended Amount
-+ UnitDiscountAmount: 0.0 - Unit Discount Amount
-+ ExtendedDiscountAmount: 0.0 - Extended Discount Amount
-+ ProductEntryMethodType (Product Entry Method Type Enumeration) - Product Entry Method Type
-+ RetailPriceEntryMethodType (Retail Price Entry Method Type Enumeration) - Retail Price Entry Method Type
-+ UnitListPrice: 0.0 - Unit List Price
-+ UnitListPriceQuantity: 1 - Unit List Price Quantity
-+ ProductPromotionFlag: false - Product Promotion Flag
-+ ProductPromotionPrice: 0.0 - Product Promotion Price
-+ ProductPromotionId: 1 - Product Promotion Id
-+ RetailPriceModifiedFlag: true - Retail Price Modified Flag
++ ProductDetailId: 1 (number) - Product Detail Id.
++ ProductDescription: Some description (string) - Product description.
++ TaxScheduleId: 1 (number) - Tax Schedule Id.
++ TaxAccountName: MF4100 NoTax Acct (string) - Tax Account Name
++ TaxGroupId: 1 (number) - Tax Group Id.
++ RetailPrice: 0.0 (number) - Retail Price.
++ RetailPriceQuantity: 1 (number) - Retail Price Quantity
++ ActualUnitPrice: 37.83 (number) - Actual Unit Price
++ ActualUnitPriceQuantity: 1 (number) - Actual Unit Price Quantity
++ Quantity: 1 (number) - Quantity
++ Units: 1 (number) - Units
++ UnitMeasureType: Count (Unit Measure Type Enumeration) - Unit Measure Type
++ ExtendedAmount: 37.83 (number) - Extended Amount
++ UnitDiscountAmount: 0.0 (number) - Unit Discount Amount
++ ExtendedDiscountAmount: 0.0 (number) - Extended Discount Amount
++ ProductEntryMethodType: Keyed (Product Entry Method Type Enumeration) - Product Entry Method Type
++ RetailPriceEntryMethodType: ManuallyEntered (Retail Price Entry Method Type Enumeration) - Retail Price Entry Method Type
++ UnitListPrice: 0.0 (number) - Unit List Price
++ UnitListPriceQuantity: 1 (number) - Unit List Price Quantity
++ ProductPromotionFlag: false (boolean) - Product Promotion Flag
++ ProductPromotionPrice: 0.0 (number) - Product Promotion Price
++ ProductPromotionId: 1 (number) - Product Promotion Id
++ RetailPriceModifiedFlag: true (boolean) - Retail Price Modified Flag
 + Include Line Item Base
 
 ## Line Item Product Price Modifier (object) - A line item modifying the price of a product being sold.
-+ PriceModifierSequenceNumber: 1 - The sequence number that this price modifier modifies.  Typically this will be the sequence number of a product.
-+ Type (Product Price Modifier Type Enumeration) - The type of modifier.
-+ ProductPromoFlag: false - Indicates if this is a product promotion.
-+ ProductPromotionId: 1 - If ProductPromoFlag is true, this value is the identifier of the promotion being applied.
-+ PreviousUnitPrice: 0.0 - The previous unit price.
-+ Percent: 0 - NEEDS DEFINITION.
-+ Amount: 12345.67 - The amount of the new price.
-+ CalculationMethod (Calculation Method Enumeration) - NEEDS DEFINITION.
-+ NewUnitPrice: 54321.76 - The new price per unit.
++ PriceModifierSequenceNumber: 1 (number) - The sequence number that this price modifier modifies.  Typically this will be the sequence number of a product.
++ Type: VariablePrice (Product Price Modifier Type Enumeration) - The type of modifier.
++ ProductPromoFlag: false (boolean) - Indicates if this is a product promotion.
++ ProductPromotionId: 1 (number) - If ProductPromoFlag is true, this value is the identifier of the promotion being applied.
++ PreviousUnitPrice: 0.0 (number) - The previous unit price.
++ Percent: 0 (number) - NEEDS DEFINITION.
++ Amount: 12345.67 (number) - The amount of the new price.
++ CalculationMethod: ManuallyEnteredPrice (Calculation Method Enumeration) - NEEDS DEFINITION.
++ NewUnitPrice: 54321.76 (number) - The new price per unit.
 + Include Line Item Base
 
 ## Line Item Product Tax (object) - A line item applying tax to a product being sold.
-+ TaxScheduleId: 1 - Tax Schedule Id.
-+ TaxAccountName: MF4100 NoTax Acct - Tax Account Name
-+ TaxableAmount: 0 - The taxable amount.
-+ TaxPercent: 0 - The tax percent.
-+ TaxAmount: 0 - The tax amount.
-+ TaxExemptOverrideType (Tax Exempt Override Type Enumeration) - The type of tax exempt override.
++ TaxScheduleId: 1 (number) - Tax Schedule Id.
++ TaxAccountName: MF4100 NoTax Acct (string) - Tax Account Name
++ TaxableAmount: 0.00 (number) - The taxable amount.
++ TaxPercent: 0.0 (number) - The tax percent.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TaxExemptOverrideType: Normal (Tax Exempt Override Type Enumeration) - The type of tax exempt override.
 + Include Line Item Base
 
 ## Line Item Tender Base (object)
-+ TenderId: 1 - The identifier for the tender (this should be a cash tender).
++ TenderId: 1 (number) - The identifier for the tender.
 + TenderType: Cash (Tender Type Enumeration) - The type of tender.
-+ TenderAmount: 21.01 - The amount of tender used.
-+ RoundingAmount: 0 - The rounding amount associated with the currency being used.  For example: Canada rounds to 0.05 for cash transactions.
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 + LineItemTenderCashEquivalence ( array[Line Item Tender Cash Equiv]) - Information about Cash Equivalence tender used.  Null if the tender is not Cash Equivalence.
 + LineItemTenderWithCustomer ( array[Line Item Tender Stored Value]) - Information about Stored Value tender used.  Null if the tender is not Stored Value.
@@ -1443,94 +1415,94 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemTenderCheck ( array[Line Item Tender Check]) - Information about Check tender used.  Null if the tender is not Check.
 
 ## Line Item Tender Cash (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
-+ TenderId: 1 - The identifier for the tender (this should be a cash tender).
++ TenderId: 1 (number) - The identifier for the tender [this should be a cash tender].
 + TenderType: Cash (Tender Type Enumeration) - The type of tender.
-+ TaxAmount - The tax amount.
-+ TipAmount - The tip amount.
-+ TenderAmount: 21.01 - The amount of tender used.
-+ RoundingAmount: 0 - The rounding amount associated with the currency being used.  For example: Canada rounds to 0.05 for cash transactions.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.02 (number) - The rounding amount associated with the currency being used.  Can be negative.  For example: Canada rounds to 0.05 for cash transactions.  So an amount of 1.17 would be rounded to 1.15, resulting in a RoundingAmount of -0.02
 + Include Line Item Base
 
 ## Line Item Tender Check (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
-+ TenderId: 1 - The identifier for the tender (this should be a cash tender).
++ TenderId: 1 (number) - The identifier for the tender [this should be a check tender].
 + TenderType: Check (Tender Type Enumeration) - The type of tender.
-+ TaxAmount - The tax amount.
-+ TipAmount - The tip amount.
-+ TenderAmount: 21.01 - The amount of tender used.
-+ RoundingAmount: 0 - The rounding amount associated with the currency being used.  For example: Canada rounds to 0.05 for cash transactions.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 
 ## Line Item Tender Stored Value (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
 + CustomerCredential (Customer Credential For Transactions) - The customer credentials associated with the line item.
-+ TenderId: 1 - The identifier for the tender (this should be a cash tender).
-+ TaxAmount - The tax amount.
-+ TipAmount - The tip amount.
++ TenderId: 1 (number) - The identifier for the tender [this should be a stored value tender].
 + TenderType: StoredValue (Tender Type Enumeration) - The type of tender.
-+ TenderAmount: 21.01 - The amount of tender used.
-+ RoundingAmount: 0 - The rounding amount associated with the currency being used.  For example: Canada rounds to 0.05 for cash transactions.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 
 ## Line Item Tender Cash Equiv (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
-+ BoardMealTypeId: 1 - The type of board meal being used.
-+ CashEquivalenceAmountLimit: 9.00 (optional) - The cash equivalency limit.  Checked server side against values in the database.
++ BoardMealTypeId: 1 (number) - The type of board meal being used.
++ CashEquivalenceAmountLimit: 9.00 (number) [optional] - The cash equivalency limit.  Checked server side against values in the database.
 + CustomerCredential (Customer Credential For Transactions) - The customer credentials associated with the line item.
-+ IsGuestMeal: false - Indicated whether or not this board transaction is a guest meal.
-+ TaxAmount - The tax amount.
-+ TipAmount - The tip amount.
-+ TenderId: 1 - The identifier for the tender (this should be a cash tender).
++ IsGuestMeal: false (boolean) - Indicated whether or not this board transaction is a guest meal.
++ TenderId: 1 (number) - The identifier for the tender [this should be a cash equiv tender].
 + TenderType: BoardCashEquiv (Tender Type Enumeration) - The type of tender.
-+ TenderAmount: 21.01 - The amount of tender used.
-+ RoundingAmount: 0 - The rounding amount associated with the currency being used.  For example: Canada rounds to 0.05 for cash transactions.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 
 ## Line Item Tender Credit Card (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
-+ AmountRequested: 21.01 - The amount requested from the credit provider.
-+ AmountAuthorized: 21.01 - The amount that was authorized.
-+ AuthorizationCode : 123456 - The authorization code received from the credit provider.
-+ CardId - The card id.
-+ CardSuffix - Not used for Slate.
-+ CommandSequence - The command sequence executed on the pin pad.
-+ DpsTransactionReference - The transaction reference received from the DPS payment gateway.
-+ EmvDeviceId: uni2cafejsd - The identifier assigned to the device performing the credit card transaction.
++ AmountRequested: 21.01 (number) - The amount requested from the credit provider.
++ AmountAuthorized: 21.01 (number) - The amount that was authorized.
++ AuthorizationCode: 123456 (number) - The authorization code received from the credit provider.
++ CardId: 0 (number)- The card id.
++ CardSuffix (string) - Not used for Slate.
++ CommandSequence: 0 (number) - The command sequence executed on the pin pad.
++ DpsTransactionReference: ABC123 (string) - The transaction reference received from the DPS payment gateway.
++ EmvDeviceId: uni2cafejsd (string) - The identifier assigned to the device performing the credit card transaction.
 + Get1Result (Action Result Token Base) - The result of the Get1 operation.
 + Get1DateTime - The date and time the Get1 request was initiated against Payment Express.
-+ MaskedPan - The masked pan.
-+ MerchantReference - The merchant reference.
++ MaskedPan: XXXXXXXXXX123456 (string) - The masked pan.
++ MerchantReference: 123 (string) - The merchant reference.
 + PaymentExpressRequestDateTime - The date and time the request was initiated against Payment Express.
 + PaymentExpressResponseDateTime - The date and time a response was received from Payment Express
-+ PurchaseResponseCode: 00 - The purchase response code.
++ PurchaseResponseCode: 00 (string) - The purchase response code.
 + Result (Action Result Token Base) - The result of the payment request.
 + SettlementDateTime - The date and time the transaction was settled.
-+ Stan - NEEDS DEFINITION.
-+ TransactionReference - The transaction reference value (referred to as TxnRef by Payment Express)
-+ TenderId: 1 - The identifier for the tender (this should be a cash tender).
++ Stan: 0 (number) - NEEDS DEFINITION.
++ TransactionReference: 0 (number) - The transaction reference value [referred to as TxnRef by Payment Express]
++ TenderId: 1 (number) - The identifier for the tender [this should be a emv tender].
 + TenderType: CreditCard (Tender Type Enumeration) - The type of tender.
-+ TenderAmount: 21.01 - The amount of tender used.
-+ TaxAmount - The tax amount.
-+ TipAmount - The tip amount.
-+ RoundingAmount: 0 - The rounding amount associated with the currency being used.  For example: Canada rounds to 0.05 for cash transactions.
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 
 ## Line Item Processing Result (object)
 + Include Request Id
-+ ErrorCode: 0 - The result code.  0 means sucess.
-+ DeniedText - The result message.
++ ErrorCode: 0 (number) - The result code.  0 means sucess.
++ DeniedText: Success (string) - The result message.
 + TransactionLineItemType (Line Item Type Enumeration) - The type of line item this processing result represents.
 
 ## Name Value Pair (object)
-+ Key - The key.
-+ Value - The Value.
++ Key: Key name (string) - The key.
++ Value: Key value (string) - The Value.
 
 ## Transaction Result Set Arts Base (object)
 + Include Request Id
-+ ErrorCode: 0 - The result code.  0 means sucess.
-+ DeniedText - The result message.
++ ErrorCode: 0 (number) - The result code.  0 means sucess.
++ DeniedText: Success (string) - The result message.
 + LineItemProcessingResults (array[Line Item Processing Result]) - List of results from the processing of each line item.
 
 ## Transaction Result Set Board Base (object)
 + Include Request Id
-+ ErrorCode: 0 - The result code.  0 means sucess.
-+ DeniedText - The result message.
++ ErrorCode: 0 (number) - The result code.  0 means sucess.
++ DeniedText: Success (string) - The result message.
 + ProcessingResults (array[Board Processing Result]) - Results from processing each board item.
 
 ## Transaction Timestamp Base (object)
@@ -1574,17 +1546,17 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + BoardPlans (array[Balance Board Base]) - The customer board balance requested.
 
 ## Customer Card Info For Transaction Customer Credential (object)
-+ CardNumber:0000000000000000100001 - The customer's card number.
-+ IssueNumber:4444 - The issue number assigned to the card.
-+ IssueNumberCaptured:true - Indicated whether or not the issue number was captured.
++ CardNumber: 0000000000000000100001 (string) - The customer's card number.
++ IssueNumber: 4444 (string) - The issue number assigned to the card.
++ IssueNumberCaptured: true (boolean) - Indicated whether or not the issue number was captured.
 
 ## Customer Credential For Transactions (object)
 + PhysicalIdType (Physical Id Type Enumeration) - The physical type of media used in the transaction.
 + EntryMethodType (Entry Method Type Enumeration) - The method used to capture the customer's credentials.
-+ SecondaryAuthEntered: false - Indicated whether or not a secondary authentication method was used.
++ SecondaryAuthEntered: false (boolean) - Indicated whether or not a secondary authentication method was used.
 + Include Customer Guid
 + CustomerId - Not used for Slate (PR5000).
-+ CustomerCardInfo (Customer Card Info For Transaction Customer Credential ) - The customer's card information.
++ CustomerCardInfo (Customer Card Info For Transaction Customer Credential) - The customer's card information.
 
 ## Customer Credential Verify Request (object)
 + Include Request Id
@@ -1637,18 +1609,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + (Healthcheck Item BbIS Registration)
     + (Healthcheck Item Loopback OAuth)
 
-## Operator Session Begin Request (object)
+## Operator Session Request (object)
 + Include Request Id
-+ Transaction (Operator Session Begin Base) - The transaction object associated with this operation.
++ Transaction (Operator Session Base) - The transaction object associated with this operation.
 
-## Operator Session Begin Response (object)
-+ Include Processing Result Response
-
-## Operator Session End Request (object)
-+ Include Request Id
-+ Transaction (Operator Session End Base) - The transaction object associated with this operation.
-
-## Operator Session End Response (object)
+## Operator Session Response (object)
 + Include Processing Result Response
 
 ## Physical Id Type Enumeration (enum)
@@ -1828,7 +1793,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Id: `FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF` (string) - The unique identifier for the object (GUID).
 
 ## Line Item Sequence Number (object)
-+ LineItemSequenceNumber: 1 - Indicated the order with which this line item appears in the list of arts transction line items.
++ LineItemSequenceNumber: 1 (number) - Indicated the order with which this line item appears in the list of arts transction line items.
 
 ## Merchant Guid (object)
 + MerchantGuid: `8D9CC985-ABDC-4851-BCEB-520B877031C8` (string) - The unique identifier for the merchant (GUID).
@@ -1852,7 +1817,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RequestId: `5196CD76-D1D6-4E4B-A8FF-949113496F96` (string) - The unique identifier of the request (GUID).
 
 ## Sequence Number (object)
-+ Sequence: 1 - The order within the list of transaction elements where this element lies.
++ Sequence: 1 (number) - The order within the list of transaction elements where this element lies.
 
 ## Session Id (object)
 + SessionId: `56653617-4853-4651-9C04-069E71C5075C` (string) - The unique identifier for the session (GUID).
@@ -1917,6 +1882,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Cashier Mode Enumeration (enum)
 + Standard - Numerical value 0.  This cashier was operating under their normal cashier rights.
 + Manager - Numerical value 1.  This cashier was operating as a manager and used manager override during this transaction.
+
+## Cash Drawer Number Enumeration (enum)
++ NotSpecified - Numerical value 0.  There is no cash drawer present or on the device or no drawer number was specified.
++ CashDrawer1 - Numerical value 1.  Operator in the cashier role is using drawer 1.
++ CashDrawer2 - Numerical value 2.  Operator in the cashier role is using drawer 2.
 
 ## Credentials Array (object)
 + Credentials (array[Credential Base]) - List of credentials.
