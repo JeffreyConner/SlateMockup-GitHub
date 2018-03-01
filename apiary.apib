@@ -128,6 +128,20 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
     
+# Group Event
+
+## Event Management [/event]
+
+### Event Attendance Get [GET /transact/api/event/{EventId}]
++ Attributes
+   + EventId: 123 (number) - The unique identifier for the event (ID).
+   
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Event Attendance Get Response)
+    
     
 # Group Event Log
     
@@ -1693,6 +1707,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Device Settings Response (object)
 + Settings (Device Settings Base)
+
+##Event Attendance Get Response (object)
++ EventId: 123 (number) - EventId of queried event.
++ Attendance: 15 (number) - Count of current attendance at event.
++ Capacity: 1000 (number) - Count of maximum configured attandance at event.
 
 ## Event Log Get Response (object)
 + EventLogId: 1 (number) - Event log id.
