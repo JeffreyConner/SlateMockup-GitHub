@@ -222,7 +222,20 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
     
-   
+# Group Policy
+
+## Policy Evaluation [/policy]
+
+### Policy Evaluate [POST /transact/api/policy/evaluate]
++ Request (application/json)
+    + Attributes (Policy Evaluate Request)
+    
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Policy Evaluate Response)
+
 # Group Report
     
 ## Report Management [/report]
@@ -1512,6 +1525,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Key: Key name (string) - The key.
 + Value: Key value (string) - The Value.
 
+## Discount Surcharge Rule (object)
++ DiscountSurchargeType: Discount (Discount Surcharge Type) - The type of rule.
++ Rate: 0.10 (number) -  The discount or surcharge rate.  A 10% discount is represented as 0.10
+
 ## Transaction Result Set Arts Base (object)
 + Include Request Id
 + ErrorCode: 0 (number) - The result code.  0 means sucess.
@@ -1780,6 +1797,24 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Operator Id
 + Include Session Id
 
+## Policy Evaluate Request (object)
++ Include Request Id
++ Include Customer Guid
++ TenderId: 1 (number) - The identifier for the tender [this should be a stored value tender].
++ Include Originator Id
++ EvaluationDateTime: `2017-09-15 22:06:53` (string) - The evaluation date/time.  [This equals the TimestampType.Start entry in the transaction's TransactionTimestamps list.]
++ IncludeEvaluationLog: false (boolean) - If true, a detailed log of the policy evaluation will be returned in the response [for debugging purposes].
+
+## Policy Evaluate Response (object)
++ Include Request Id
++ Include Customer Guid
++ IsTransactionAllowed: true (boolean) - True if the system policy has determined that a transaction can be generated for the specified customer, tender, originator, and date/time.  The transaction can still be disallowed later for other reasons, such as insufficient funds.
++ EvaluationSummary: "Success" (string) - Information describing the result of the policy evaluation.
++ AvailableBalance: 123.45 (number) - The available balance that can be used to pay for the transaction.  If the transaction amount is <= AvailableBalance, then the transaction can proceed.
++ TaxExempt: false (boolean) - If true, then no tax can be applied to the transaction.  If false, tax is determined normally based on the product tax schedule.
++ DiscountSurchargeRules (array[Discount Surcharge Rule]) - List of discounts and/or surcharges that must be applied to the transaction.
++ EvaluationLog (array[string]) - Detailed log of the policy evaluation that generated this response.
+
 ## Transaction Post Request (object)
 + Include Request Id
 + Transaction (Transaction Base) - The transaction object associated with this operation.
@@ -1926,6 +1961,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + AT3000 - Numerical value = 1.  AT3000 style transaction terminal.
 + MF4100 - Numerical value = 2.  MF4100 style transaction terminal.
 + PR5000 - Numerical value = 3.  PR5000/Slate style transaciton terminal.
+
+## Discount Surcharge Type (enum)
++ Discount - Numerical value = 0.
++ Surcharge - Numerical value = 1.
 
 ## Disposition Enumeration (enum)
 + Unknown
