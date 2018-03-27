@@ -1342,6 +1342,18 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
 + CustomerCard (Customer Card Info For Transaction Customer Credential ) - The card information provided with the transaction.
 + TransactionType: RegularEntry (Attended Event Transaction Type Enumeration) - The type of attendence transaction.
+    + Members
+        + RegularEntry
+        + RegularReEntry
+        + RegularSwipeOut
+        + RegularReverse
+        + GuestEntry
+        + GuestReEntry
+        + GuestSwipeOut
+        + GuestReverse
+        + NonCustomerEntry
+        + NonCustomerSwipeOut
+        + NonCustomerReverse
 + EventNumber: 1 (number) - The number of the event.
 + Include Customer Guid
 
