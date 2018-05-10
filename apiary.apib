@@ -644,11 +644,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + AbsoluteFromFirstDigit - Absolute position from the first digit on track 2
 + RelativeFromFirstSeparator - Relative positioning from the first field separator on track 2
 
-## Cash Drawer Enumeration (enum)
-+ NotSpecified - There is no cash drawer present or on the device or no drawer number was specified.
-+ CashDrawer1 - Cash Drawer 1.
-+ CashDrawer2 - Cash Drawer 2.
-
 ## Customer Board Count (object)
 + BoardPlanId: 26 (number)
 + BoardPlanName: `tb bp 1 - no restrictions`
@@ -741,7 +736,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + FullName: `bs manager (1,1)` (string) - The full name of the operator.
 + Pin: 1 (string) - The PIN for the operator.
 + IsManager: true (boolean) - True means the operator has manager override privilege.
-+ CashDrawer: CashDrawer1 (Cash Drawer Enumeration) - The operator`s drawer number.
++ CashDrawer: 1 (number) - The operator`s drawer number (1 or 2).
 + PinRequired: false (boolean) - Is the operator`s pin required for login.
 + PinChangeRequired: false (boolean) - Does the operator have to change their pin.
 + CardNumber: 1234560000000022 (string) - The operator`s card number.
@@ -1317,7 +1312,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Sequence Number
 + OperatorMode: Standard (Cashier Mode Enumeration) - The level of rights the operator was operating under.
 + Include Session Id
-+ CashDrawerNumber: CashDrawer1 (Cash Drawer Number Enumeration) - The drawer the cashier is operating out of.
++ CashDrawerNumber: 1 (number) - The drawer the cashier is operating out of (1 or 2).
 
 ## Arts Transaction Element (object)
 + Include Generic Id
@@ -1942,11 +1937,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Cashier Mode Enumeration (enum)
 + Standard - Numerical value 0.  This cashier was operating under their normal cashier rights.
 + Manager - Numerical value 1.  This cashier was operating as a manager and used manager override during this transaction.
-
-## Cash Drawer Number Enumeration (enum)
-+ NotSpecified - Numerical value 0.  There is no cash drawer present or on the device or no drawer number was specified.
-+ CashDrawer1 - Numerical value 1.  Operator in the cashier role is using drawer 1.
-+ CashDrawer2 - Numerical value 2.  Operator in the cashier role is using drawer 2.
 
 ## Credentials Array (object)
 + Credentials (array[Credential Base]) - List of credentials.
