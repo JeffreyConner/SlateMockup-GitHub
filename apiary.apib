@@ -8,7 +8,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     
 ## Board Management
 
-### Board Information Get [GET /transact/api/board/device/{OriginatorGuid}/customer/{CustomerGuid}/information?IsGuestMeal={isGuestMeal}&MealTypeId={mealtypeId}&ForcePost={forcePost}&BoardPlanId={boardPlanId}"]
+### Board Information Get [GET /transact/api/v1/board/device/{OriginatorGuid}/customer/{CustomerGuid}/information?IsGuestMeal={isGuestMeal}&MealTypeId={mealtypeId}&ForcePost={forcePost}&BoardPlanId={boardPlanId}"]
 + Attributes
     + CustomerGuid: `cccccccc-cccc-cccc-cccc-cccccccccccc` - The unique identifier for the customer (GUID).
     + OriginatorGuid: `dddddddd-dddd-dddd-dddd-dddddddddddd` - The unique identifier for the device (GUID).
@@ -28,7 +28,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     
 ## Customer Management [/customer]
 
-### Customer Board Balance Get [GET /transact/api/customer/{customerId}/device/{deviceId}/board/balance]
+### Customer Board Balance Get [GET /transact/api/v1/customer/{customerId}/device/{deviceId}/board/balance]
 + Attributes
     + customerId: `cccccccc-cccc-cccc-cccc-cccccccccccc` - The unique identifier for the customer (GUID).
     + deviceId: `dddddddd-dddd-dddd-dddd-dddddddddddd` - The unique identifier for the device (GUID).
@@ -39,7 +39,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Customer Board Balance Get Response)
 
-### Customer Stored Value Balance Get [GET /transact/api/customer/{customerId}/device/{deviceId}/storedvalue/balance]
+### Customer Stored Value Balance Get [GET /transact/api/v1/customer/{customerId}/device/{deviceId}/storedvalue/balance]
 + Attributes
     + customerId: `cccccccc-cccc-cccc-cccc-cccccccccccc` - The unique identifier for the customer (GUID).
     + deviceId: `dddddddd-dddd-dddd-dddd-dddddddddddd` - The unique identifier for the device (GUID).
@@ -50,7 +50,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Customer Stored Value Balance Get Response)
 
-### Customer Credential Verify [POST /transact/api/customer/credential/verify]
+### Customer Credential Verify [POST /transact/api/v1/customer/credential/verify]
 + Request (application/json)
     + Attributes (Customer Credential Verify Request)
 
@@ -64,7 +64,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
 
-### Customer Info Get [GET /transact/api/customer/{id}]
+### Customer Info Get [GET /transact/api/v1/customer/{id}]
 + Attributes
     + id: `cccccccc-cccc-cccc-cccc-cccccccccccc` - The unique identifier for the customer (GUID).
 
@@ -78,7 +78,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Device Operation [/device]
 
-### Device Heartbeat [POST /transact/api/device/heartbeat]
+### Device Heartbeat [POST /transact/api/v1/device/heartbeat]
 + Request (application/json)
     + Attributes (Device Heartbeat Request)
     
@@ -92,7 +92,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
 
-### Download Device Operators [GET /transact/api/device/{id}/operators]
+### Download Device Operators [GET /transact/api/v1/device/{id}/operators]
 + Attributes
     + id: `ffffffff-ffff-ffff-ffff-ffffffffffff` (string, required) - The unique identifier assigned to the device.
 
@@ -103,7 +103,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Operators Get Response)
     
 
-### Device Settings Get [GET /transact/api/device/{id}/settings]
+### Device Settings Get [GET /transact/api/v1/device/{id}/settings]
 + Attributes
     + id: `ffffffff-ffff-ffff-ffff-ffffffffffff` (string, required) - The unique identifier assigned to the device.
 
@@ -113,7 +113,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Device Settings Response)
 
-### Register a device [POST /transact/api/device/register]
+### Register a device [POST /transact/api/v1/device/register]
 + Request (application/json)
     + Attributes (Device Registration Request)
     
@@ -132,7 +132,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Event Management [/event]
 
-### Event Attendance Get [GET /transact/api/event/{EventId}/attendance]
+### Event Attendance Get [GET /transact/api/v1/event/{EventId}/attendance]
 + Attributes
    + EventId: 123 (number) - The unique identifier for the event (ID).
    
@@ -147,7 +147,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     
 ## Event Log Management [/eventlog]
 
-### Event Log Get [GET /transact/api/eventlog/{EventLogId}]
+### Event Log Get [GET /transact/api/v1/eventlog/{EventLogId}]
 + Attributes
     + EventLogId: 501 (number) - The unique identifier for the event log (ID).
     
@@ -157,7 +157,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Event Log Get Response)
 
-### Event Log Get Summary [GET /transact/api/eventlog/summary]
+### Event Log Get Summary [GET /transact/api/v1/eventlog/summary]
 + Attributes (Event Log Get Summary Request)
     
 + Response 200
@@ -166,7 +166,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Event Log Get Summary Response)
 
-### Event Log Set [POST /transact/api/eventlog]
+### Event Log Set [POST /transact/api/v1/eventlog]
 + Attributes (Event Log Set Request)
     
 + Response 200 
@@ -180,7 +180,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Operator Management [/operator]
 
-### Operator Session Begin/End [POST /transact/api/transaction]
+### Operator Session Begin/End [POST /transact/api/v1/transaction]
 + Request (application/json)
     + Attributes (Operator Session Request)
     
@@ -194,7 +194,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
 
-### Operator PIN Change [PUT /transact/api/operator/pinchange]
+### Operator PIN Change [PUT /transact/api/v1/operator/pinchange]
 + Request (application/json)
     + Attributes (Operator PIN Change Request)
     
@@ -208,7 +208,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
 
-### Operator Validate [POST /transact/api/operator/validate]
+### Operator Validate [POST /transact/api/v1/operator/validate]
 + Request (application/json)
     + Attributes (Operator Validate Request)
     
@@ -226,7 +226,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Policy Evaluation [/policy]
 
-### Policy Evaluate [POST /transact/api/policy/evaluate]
+### Policy Evaluate [POST /transact/api/v1/policy/evaluate]
 + Request (application/json)
     + Attributes (Policy Evaluate Request)
     
@@ -240,7 +240,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     
 ## Report Management [/report]
 
-### Drawer Audit Get [GET /transact/api/report/operator/{SessionGuid}]
+### Drawer Audit Get [GET /transact/api/v1/report/operator/{SessionGuid}]
 + Attributes
     + SessionGuid: `eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee` - The unique identifier for the session (GUID).
     
@@ -251,7 +251,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Drawer Audit Get Response)
    
 
-### Pos Audit Get [GET /transact/api/report/originator/{OriginatorGuid}/{BusinessDayType}]
+### Pos Audit Get [GET /transact/api/v1/report/originator/{OriginatorGuid}/{BusinessDayType}]
 + Attributes
     + OriginatorGuid: `dddddddd-dddd-dddd-dddd-dddddddddddd` - The unique identifier for the device (GUID).
     + BusinessDayType: 1 (number) - Type of day for which the report will be generated (1 - today, 2 - yesterday). Value can be ommited.
@@ -263,7 +263,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Daily Report Get Response)
 
 
-### ProfitCenter Audit Get [GET /transact/api/report/profitcenter/{ProfitCenterGuid}/{BusinessDayType}]
+### ProfitCenter Audit Get [GET /transact/api/v1/report/profitcenter/{ProfitCenterGuid}/{BusinessDayType}]
 + Attributes
     + ProfitCenterGuid: `ffffffff-ffff-ffff-ffff-ffffffffffff` - The unique identifier for the profit center (GUID).
     + BusinessDayType: 1 (number) - Type of day for which the report will be generated (1 - today, 2 - yesterday). Can be ommited.
@@ -275,7 +275,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Daily Report Get Response)
 
 
-### ProfitCenter Meal Count Report Get [GET /transact/api/report/profitcenter/{ProfitCenterGuid}/mealscount]
+### ProfitCenter Meal Count Report Get [GET /transact/api/v1/report/profitcenter/{ProfitCenterGuid}/mealscount]
 + Attributes
     + ProfitCenterGuid: `ffffffff-ffff-ffff-ffff-ffffffffffff` - The unique identifier for the profit center (GUID).
     
@@ -286,7 +286,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Meal Count Report Get Response)
 
 
-### Pos Meal Count Report Get [GET /transact/api/report/pos/{PosGuid}/mealscount]
+### Pos Meal Count Report Get [GET /transact/api/v1/report/pos/{PosGuid}/mealscount]
 + Attributes
     + PosGuid: `ffffffff-ffff-ffff-ffff-ffffffffffff` - The unique identifier for the pos (GUID).
     
@@ -296,7 +296,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Meal Count Report Get Response)
 
-### Operator Sessions Get [GET /transact/api/report/originator/{OriginatorGuid}/cashDrawer/{CashDrawerNumber}/sessions]
+### Operator Sessions Get [GET /transact/api/v1/report/originator/{OriginatorGuid}/cashDrawer/{CashDrawerNumber}/sessions]
 + Attributes
     + OriginatorGuid: `dddddddd-dddd-dddd-dddd-dddddddddddd` - The unique identifier for the device (GUID).
     + CashDrawerNumber: 1 (number) - Cash Drawer the cashier is using.
@@ -309,7 +309,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 # Group Service
 
-## Service Healthcheck [GET /transact/api/healthcheck]
+## Service Healthcheck [GET /transact/api/v1/healthcheck]
     
 + Response 200
     + Headers
@@ -322,14 +322,14 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     
 ## Security Management [/security]
 
-### Door States Get All [GET /transact/api/security/doors/state]
+### Door States Get All [GET /transact/api/v1/security/doors/state]
 + Response 200
     + Headers
     
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door States Get Response)
    
-### Door States Get [GET /transact/api/security/doors/{DoorId}/state]
+### Door States Get [GET /transact/api/v1/security/doors/{DoorId}/state]
 + Attributes
     + DoorId: 11 - The unique identifier for the door.
     
@@ -339,7 +339,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door States Get Response)
     
-### Door Alarms Get All [GET /transact/api/security/doors/alarm?startDate={StartDate}&endDate={EndDate}]
+### Door Alarms Get All [GET /transact/api/v1/security/doors/alarm?startDate={StartDate}&endDate={EndDate}]
 + Attributes
     + StartDate: `2012-04-23` (string) - Optional Start Date.
     + EndDate: `2012-04-30` (string) - Optional End Date.
@@ -351,7 +351,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Door Alarms Get Response)
     
 
-### Door Alarms Get [GET /transact/api/security/doors/{DoorId}/alarm?startDate={StartDate}&endDate={EndDate}]
+### Door Alarms Get [GET /transact/api/v1/security/doors/{DoorId}/alarm?startDate={StartDate}&endDate={EndDate}]
 + Attributes
     + DoorId: 11 - The unique identifier for the door.
     + StartDate: `2012-04-23` (string) - Optional Start Date.
@@ -363,14 +363,14 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door Alarms Get Response)
     
-### Active Door Alarms Get [GET /transact/api/security/doors/alarm/active]
+### Active Door Alarms Get [GET /transact/api/v1/security/doors/alarm/active]
 + Response 200
     + Headers
     
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door Alarms Get Response)
     
-### Doors by Cardholder Get [GET /transact/api/security/doors/users/{CardHolder}?accessPlanActive={AccessPlanActive}]
+### Doors by Cardholder Get [GET /transact/api/v1/security/doors/users/{CardHolder}?accessPlanActive={AccessPlanActive}]
 + Attributes
     + CardHolder: 11 - Either CustomerId or CustomerGuid can be used as CardHolder.
     + AccessPlanActive: `true` (boolean) - Optional Access plan active filter.
@@ -381,7 +381,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (User Doors Get Response)
     
-### Users by Door Get [GET /transact/api/security/doors/{doorId}/users?accessPlanActive={AccessPlanActive}&customerActive={CustomerActive}]
+### Users by Door Get [GET /transact/api/v1/security/doors/{doorId}/users?accessPlanActive={AccessPlanActive}&customerActive={CustomerActive}]
 + Attributes
     + DoorId: 11 - Door Id.
     + AccessPlanActive: true (boolean) - Optional Access plan active filter.
@@ -393,7 +393,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door Users Get Response)
     
-### Door Transaction by Cardholder Get [GET /transact/api/security/doors/users/{CardHolder}/history/transactions?startDate={StartDate}&endDate={EndDate}]
+### Door Transaction by Cardholder Get [GET /transact/api/v1/security/doors/users/{CardHolder}/history/transactions?startDate={StartDate}&endDate={EndDate}]
 + Attributes
     + CardHolder: 11 - Either CustomerId or CustomerGuid can be used as CardHolder.
     + StartDate: `2012-04-23` (string) - Optional Start Date.
@@ -405,7 +405,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door Transaction Get Response)
     
-### Door Transaction by Door Get [GET /transact/api/security/doors/{DoorId}/history/transactions?startDate={StartDate}&endDate={EndDate}]
+### Door Transaction by Door Get [GET /transact/api/v1/security/doors/{DoorId}/history/transactions?startDate={StartDate}&endDate={EndDate}]
 + Attributes
     + DoorId: 11 - Door Id.
     + StartDate: `2012-04-23` (string) - Optional Start Date.
@@ -417,7 +417,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door Transaction Get Response)
     
-### Door Transaction by Building Get [GET /transact/api/security/doors/buildings/{BuildingId}/history/transactions?startDate={StartDate}&endDate={EndDate}]
+### Door Transaction by Building Get [GET /transact/api/v1/security/doors/buildings/{BuildingId}/history/transactions?startDate={StartDate}&endDate={EndDate}]
 + Attributes
     + BuildingId: 11 - Building Id.
     + StartDate: `2012-04-23` (string) - Optional Start Date.
@@ -429,7 +429,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door Transaction Get Response)
     
-### Door History Get [GET /transact/api/security/doors/{DoorId}/history/states?startDate={StartDate}&endDate={EndDate}]
+### Door History Get [GET /transact/api/v1/security/doors/{DoorId}/history/states?startDate={StartDate}&endDate={EndDate}]
 + Attributes
     + DoorId: 11 - Door Id.
     + StartDate: `2012-04-23` (string) - Optional Start Date.
@@ -441,14 +441,14 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door History Get Response)
     
-### Door Get All [GET /transact/api/security/doors]
+### Door Get All [GET /transact/api/v1/security/doors]
 + Response 200
     + Headers
     
             Content-Type: application/json; charset=UTF-8
     + Attributes (Door Get Response)
     
-### Master Controller Set [POST /transact/api/security/masterControllers/{MasterControllerId}]
+### Master Controller Set [POST /transact/api/v1/security/masterControllers/{MasterControllerId}]
 + Attributes
     + MasterControllerId: 11 - Optional Master controller Id.
     
@@ -465,7 +465,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
     
-### Door Set [POST /transact/api/security/doors/{DoorId}]
+### Door Set [POST /transact/api/v1/security/doors/{DoorId}]
 + Attributes
     + DoorId: 11 - Optional Door Id.
     
@@ -482,7 +482,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
     
-### Door State Change [POST /transact/api/security/doors/state/override]
+### Door State Change [POST /transact/api/v1/security/doors/state/override]
 + Request (application/json)
     + Attributes (Door State Change Post Request)
     
@@ -496,7 +496,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
     
-### Acknowledge All Alarms [POST /transact/api/security/doors/alarm/close]
+### Acknowledge All Alarms [POST /transact/api/v1/security/doors/alarm/close]
 + Request (application/json)
     + Attributes (Acknowledge Alarm Post Request)
     
@@ -510,7 +510,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
     
-### Acknowledge Door Alarms [POST /transact/api/security/doors/{DoorId}/alarm/close]
+### Acknowledge Door Alarms [POST /transact/api/v1/security/doors/{DoorId}/alarm/close]
 + Attributes
     + DoorId: 11 - Door Id.
     
@@ -532,7 +532,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Transaction Processing [/transaction]
 
-### Process a Transaction [POST /transact/api/transaction]
+### Process a Transaction [POST /transact/api/v1/transaction]
 + Request (application/json)
     + Attributes (Transaction Post Request)
     
