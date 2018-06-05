@@ -286,9 +286,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Attributes (Meal Count Report Get Response)
 
 
-### POS Meal Count Report Get [GET /transact/api/v1/report/pos/{OriginatorGuid}/FiUpdated/mealscount]
+### Device Meal Count Report Get [GET /transact/api/v1/report/device/{DeviceGuid}/mealscount]
 + Attributes
-    + PosGuid: `ffffffff-ffff-ffff-ffff-ffffffffffff` - The unique identifier for the pos (GUID).
+    + DeviceGuid: `ffffffff-ffff-ffff-ffff-ffffffffffff` - The unique identifier for the device (GUID).
     
 + Response 200
     + Headers
@@ -801,7 +801,9 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ConfirmationBeep: true (boolean) - Indicator to enable confirmation beeps.
 + ProductMask: 999999999999XXXXXXXXXXXXXXXXXXXX (string) - Product Number Format Mask.
 + StoredValueCashEntryType (Purchase Entry Type Enumeration) - Purchase Entry Type.
-+ MealsLeftByType (Meals Left By Enumeration) - Meals Left By.
++ CardDisplayMaskRightOffset: 4 (number) - Card Display Mask Right Offset.
++ CardDisplayMaskLength: 18 (number) - Card Display Mask Length.
++ CustomerNumberDisplayFormat: `9999999999999999--999999` (string) - Customer Number Display Format.
 
 ## Default Value Base (object)
 + DefaultBoardMealTypeId: 1 (number) - Default Board Plan Meal Type Association.
@@ -1366,6 +1368,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ExtraLeft: 0 - Extra meals left
 + TransferLeft: 0 - Transfer meals left
 + TypeUsed: 1 (Board Meal Type Used Enumeration) - Meal Type used.
++ DisplayMealsLeftBy (Meals Left By Enumeration) - Pos option Meals Left By Type. 
 
 ## Control Element (object)
 + TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
@@ -1820,7 +1823,6 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + ControlTransactionProcessingResult (Processing Result Response) - The results of any control transaction that might have occurred.
 + ArtsTransactionProcessingResultSet (Transaction Result Set Arts Base) - The results of any arts transactions that might have occurred.
 + BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occurred.
-+ BoardTransactionProcessingResultSet (Transaction Result Set Board Base) -  The results of any board transactions that might have occurred.
 
 ## User Doors Get Response (object)
 + CustomerId: 1 (number) - Customer Id.
@@ -2040,10 +2042,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Meals Left By Enumeration (enum)
 + Auto - 0
-+ Days - 1
-+ Weeks - 2
-+ Months - 3
-+ Semesters - 4
++ Day - 1
++ Week - 2
++ Month - 3
++ Semester - 4
 + Year - 5
 
 ## Operator Session Begin Methods (enum)
