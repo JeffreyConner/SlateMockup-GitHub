@@ -619,7 +619,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Board Period Base (object)
 + Period: 1 (number) - Board Period Number.
-+ BoardPeriodDay: 1 (number) - Board Period Day.
++ BoardPeriodDay (Day of Week Enumeration) - Board Period Day.
 + ProfitCenterId: 1 (number) - Profit Center ID.
 + BoardPeriodName: MyPeriodName (string) - Board Period Name.
 + BoardPeriodStartDateTime: `2017-04-23T12:00:00.123` (string) - (Nullable) Board Period Start Date.
@@ -1955,6 +1955,15 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + CustomerNumber - Use a customer number to validate a customer.
 + CardNumberAndSwipe - Use a card number manually or swiped to validate a customer.
 + Any - Any other form of idenfication (provided in this enumeration) is considered valid.
+
+## Day of Week Enumeration (enum)
++ 0 - Sunday
++ 1 - Monday
++ 2 - Tuesday
++ 3 - Wednesday
++ 4 - Thursday
++ 5 - Friday
++ 6 - Saturday
 
 ## Device Type Enumeration (enum)
 + AT3000 - Numerical value = 1.  AT3000 style transaction terminal.
