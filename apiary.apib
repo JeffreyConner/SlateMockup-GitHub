@@ -749,6 +749,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + CardNumber: 1234560000000022 (string) - The operator`s card number.
 + IssueNumber: null (string) - The operator`s card issue number.
 + RoleGroup: `065dfe36-7694-4571-b86c-d9bedacdbf77` - The unique identifier (Guid) of the role group the operator belongs to.
++ CardStatus (Card Status Enumeration) - (Nullable) Card status.
++ CardActiveStartDate: `2017-04-23T12:00:00.123` (string) - (Nullable) Card active start date.
++ CardActiveEndDate: `2017-04-23T12:00:00.123` (string) - (Nullable) Card active start date.
++ CardLost: false (boolean) - (Nullable) Card lost flag
 
 ## Cash Drawer Properties Base (object)
 + UseCashDrawer: true (boolean) - Use Cash Drawer.
@@ -1943,6 +1947,13 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Amount - 1
 + ManuallyEnteredPrice - 2
 + PromotionalPrice - 3
+
+## Card Status Enumeration (enum)
++ Unknown - -1
++ Active - 0
++ Frozen - 1
++ Retired - 2
++ CustomerDeleted - 3
 
 ## Cashier Mode Enumeration (enum)
 + Standard - Numerical value 0.  This cashier was operating under their normal cashier rights.
