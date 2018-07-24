@@ -1343,6 +1343,8 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemProductPriceModifiers (array[Line Item Product Price Modifier]) - All of the product price modifiers included in the arts transactions.  Empty set if there aren't any.
 + LineItemProductTaxExemptions (array) - Empty set (not used for PR5000 devices).
 + LineItemTenders (array[Line Item Tender Base]) - Tenders used during the transaction.
++ LineItemDeposits (array[Line Item Deposit Base]) - List of line item deposits in the transaction.
++ LineItemEnrichments (array[Line Item Enrichment Base]) - List of line item enrichments in the transaction.
 
 ## Attendance Element (object)
 + Include Generic Id
@@ -1454,6 +1456,24 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemTenderEmv ( array[Line Item Tender Credit Card]) - Information about EMV Credit Card tender used.  Null if the tender is not EMV Credit Card.
 + LineItemTenderCash ( array[Line Item Tender Cash]) - Information about Cash tender used.  Null if the tender is not Cash.
 + LineItemTenderCheck ( array[Line Item Tender Check]) - Information about Check tender used.  Null if the tender is not Check.
+
+## Line Item Deposit Base (object)
++ Include Line Item Base
++ StoredValueAmount: 10.00 (number) - Amount to Deposit into Stored Value Account.
++ CardPurchaseFeeAmount: 0.00 (number) - Used by AMC when dispensing cards. Normally just leave it $0.00.
++ ActualUnitPrice: 10.00 (number) - Amount Charged to Customer for Deposit.
++ UnitCostPrice: 0.00 (number) - Cost to the Retailer.
++ StoredValueAccountTypeId: 86 (number) - Sv Account Type Id.
++ EnrichmentFlag: false (boolean) - Enrichment flag.
++ EnrichmentParentLineItemSequence: 0 (number) - Enrichment parent line item sequence.
++ CustomerCredential (Customer Credential For Transactions) - The customer credentials associated with the line item.
+
+## Line Item Enrichment Base (object)
++ Include Line Item Base
++ Percentage: 0.5 (number) - Percentage to be added.
++ RoundingAmount: 0.00 (number) - Rounding amount.
++ Amount: 5.00 (number) - Amount to be added.
++ StoredValueEnrichmentSequence: 1 (number) - Sv Enrichment sequence.
 
 ## Line Item Tender Cash (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
 + TenderId: 1 (number) - The identifier for the tender [this should be a cash tender].
