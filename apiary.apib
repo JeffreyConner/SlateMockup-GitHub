@@ -539,7 +539,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Transaction Processing [/transaction]
 
-### Process a Transaction [POST /transact/api/v1/transaction]
+### Process a Transaction (V1) [POST /transact/api/v1/transaction]
 + Request (application/json)
     + Attributes (Transaction Post Request)
     
@@ -553,9 +553,29 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     - Response code 400 is returned if there is a problem with any of the request parameters.
     + Attributes (Response 400 Error)
 
+### Process a Transaction (V2) [POST /transact/api/v2/transaction]
++ Request (application/json)
+    + Attributes (Transaction Post Request V2)
+
++ Response 200
+    + Headers
+    
+            Content-Type: application/json; charset=UTF-8
+    + Attributes (Transaction Post Response)
+
++ Response 400 (application/json)
+    - Response code 400 is returned if there is a problem with any of the request parameters.
+    + Attributes (Response 400 Error)
+
 # Data Structures
 
 ## Action Result Token Base (object)
++ Include Generic Id
++ ResultDomain : 236
++ ResultDomainId : 1
++ Message : Approved
+
+## Action Result Token V1 (object)
 + Include Generic Id
 + ResultDomain : 236
 + ResultDomainId : 1
@@ -1290,6 +1310,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 
 ## Transaction Base (object)
 + Include Generic Id
++ Include Originator Id
 + Disposition: Complete (Disposition Enumeration) - The state of the transaction.
 + ForcePost: false (boolean) - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
 + TransactionTimestamps (array[Transaction Timestamp Base]) - Collection of timestamps associated with the transaction.
@@ -1320,10 +1341,25 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Type: PR5000 (Originator Type Enumeration) - The type of originator where the transaction was performed at.
 + AttendType: Attended (Attend Type Enumeration) - Indicated the level of interation with an operator.
 
+## Originator Element V1 (object) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
++ Include Generic Id
++ Include Sequence Number
++ Include Originator Id
++ Type: PR5000 (Originator Type Enumeration) - The type of originator where the transaction was performed at.
++ AttendType: Attended (Attend Type Enumeration) - Indicated the level of interation with an operator.
+
 ## Operator Element (object)
 + Include Operator Guid
 + Include Generic Id
 + Include Sequence Number
++ OperatorMode: Standard (Cashier Mode Enumeration) - The level of rights the operator was operating under.
++ Include Session Id
++ CashDrawerNumber: 1 (number) - The drawer the cashier is operating out of (1 or 2).
+
+## Operator Element V1 (object)
++ Include Generic Id
++ Include Sequence Number
++ Include Operator Guid
 + OperatorMode: Standard (Cashier Mode Enumeration) - The level of rights the operator was operating under.
 + Include Session Id
 + CashDrawerNumber: 1 (number) - The drawer the cashier is operating out of (1 or 2).
@@ -1346,6 +1382,33 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemDeposits (array[Line Item Deposit Base]) - List of line item deposits in the transaction.
 + LineItemEnrichments (array[Line Item Enrichment Base]) - List of line item enrichments in the transaction.
 
+## Arts Transaction Element V2 (object)
++ Include Generic Id
++ Include Sequence Number
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
++ CancelledFlag: false (boolean) - True if this transaction is a cancelled transaction.
++ ValidationType: AcceptedOffline (Validation Type Enumeration) - Specified if the transaction was accepted or denied while online or offline.
++ TranType: Sale (Transaction Type Enumeration) - Specified if the transaction is a sale or return
++ ControlTotalBeforeTransaction: 12345.67 (optional) - Control total immediately prior to this transaction -- Required for MF4100, Slate, and Cash Register device types.
++ ControlTotalAfterTransaction: 12345.67 (optional) - Control total immediately after this transaction -- Required for MF4100, Slate, and Cash Register device types.
++ LineItemProducts (array[Line Item Product V1]) - All of the products included in the arts transactions.  Empty set if there aren't any.
++ LineItemProductPromos (array) - Empty set (not used for PR5000 devices).
++ LineItemDiscounts (array[Line Item Discount V1]) - List of line item discounts in the transaction.
++ LineItemSurcharges (array[Line Item Surcharge V1]) - List of line item surcharges in the transaction.
++ LineItemProductTaxes (array[Line Item Product Tax V1]) - All of the product tax modifiers included in the arts transactions.  Empty set if there aren't any.
++ LineItemProductPriceModifiers (array[Line Item Product Price Modifier]) - All of the product price modifiers included in the arts transactions.  Empty set if there aren't any.
++ LineItemProductTaxExemptions (array) - Empty set (not used for PR5000 devices).
++ LineItemProductTaxOverrides (array) - Empty set (not used for PR5000 devices).
++ LineItemTenderCashItems (array[Line Item Tender Cash V2]) - List of cash tenders used during the transaction.
++ LineItemTenderCheckItems (array[Line Item Tender Check V2]) - List of check tenders used during the transaction.
++ LineItemTenderEmvItems (array[Line Item Tender Emv V2]) - WORK IN PROGRESS -- THIS OBJECT HAS NOT BEEN FINALIZED -  List of EMV tenders used during the transaction.
++ LineItemTenderStoredValueItems (array[Line Item Tender Stored Value V2]) - List of stored value tenders used during the transaction.
++ LineItemTenderCashEquivalenceItems (array[Line Item Tender Cash Equiv V2]) - List of cash equivalence tenders used during the transaction.
++ LineItemTenderDiscounts (array[Line Item Tender Discount V1]) - List of tender discounts in the transaction.
++ LineItemTenderSurcharges (array[Line Item Tender Surcharge V1]) - List of tender surcharges in the transaction.
++ LineItemDeposits (array[Line Item Deposit V2]) - List of line item deposits in the transaction.
++ LineItemEnrichments (array[Line Item Enrichment V1]) - List of line item enrichments in the transaction.
+
 ## Attendance Element (object)
 + Include Generic Id
 + Include Sequence Number
@@ -1355,6 +1418,13 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + EventNumber: 1 (number) - The number of the event.
 + Include Customer Guid
 
+## Attendance Element V2 (object)
++ Include Generic Id
++ Include Sequence Number
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
++ TransactionType (Attended Event Transaction Type Enumeration) - The type of attendence transaction.
++ EventNumber: 1 (number) - The number of the event.
++ CustomerCredential (Customer Credential V2) - Customer credential.
 
 ## Board Element (object)
 + TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
@@ -1365,6 +1435,15 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + EntryMethodType: ManuallyEntered (Entry Method Type Enumeration) - The method used to capture the customer's credentials.
 + Include Generic Id
 + Include Sequence Number
+
+## Board Element V2 (object)
++ Include Generic Id
++ Include Sequence Number
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
++ MealTypeId: 1 (number)
++ IsGuestMeal: false (boolean) - True if this is a guest meal.
++ CountUsed: 1 (number) - Number of board counts to use.
++ CustomerCredential (Customer Credential V2) - Customer credential.
 
 ## Board Processing Result (object)
 + Include Request Id
@@ -1393,6 +1472,16 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     + Members
         + SignOn
         + SignOff
+
+## Control Element V1 (object)
++ Include Generic Id
++ Include Sequence Number
++ TransactionNumber: 123456 (number) - The numerical value assigned to the transaction to assist in failover detection.
++ ControlType: SignOn (enum) - Specifies login or logout.
+    + Members
+        + SignOn
+        + SignOff
++ Include Session Id
 
 ## Line Item Base (object)
 + Include Line Item Sequence Number
@@ -1424,6 +1513,34 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RetailPriceModifiedFlag: true (boolean) - Retail Price Modified Flag
 + Include Line Item Base
 
+## Line Item Product V1 (object) - A line item describing a product being sold.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ ProductDetailId: 1 (number) - Product Detail Id.
++ ProductDescription: Some description (string) - Product description.
++ TaxScheduleId: 1 (number) - Tax Schedule Id.
++ TaxAccountName: MF4100 NoTax Acct (string) - Tax Account Name
++ TaxGroupId: 1 (number) - Tax Group Id.
++ RetailPrice: 0.0 (number) - Retail Price.
++ RetailPriceQuantity: 1 (number) - Retail Price Quantity
++ ActualUnitPrice: 37.83 (number) - Actual Unit Price
++ ActualUnitPriceQuantity: 1 (number) - Actual Unit Price Quantity
++ Quantity: 1 (number) - Quantity
++ Units: 1 (number) - Units
++ UnitMeasureType: Count (Unit Measure Type Enumeration) - Unit Measure Type
++ ExtendedAmount: 37.83 (number) - Extended Amount
++ UnitDiscountAmount: 0.0 (number) - Unit Discount Amount
++ ExtendedDiscountAmount: 0.0 (number) - Extended Discount Amount
++ ProductEntryMethodType: Keyed (Product Entry Method Type Enumeration) - Product Entry Method Type
++ RetailPriceEntryMethodType: ManuallyEntered (Retail Price Entry Method Type Enumeration) - Retail Price Entry Method Type
++ UnitListPrice: 0.0 (number) - Unit List Price
++ UnitListPriceQuantity: 1 (number) - Unit List Price Quantity
++ ProductPromotionFlag: false (boolean) - Product Promotion Flag
++ ProductPromotionPrice: 0.0 (number) - Product Promotion Price
++ ProductPromotionId: 1 (number) - Product Promotion Id
++ RetailPriceModifiedFlag: true (boolean) - Retail Price Modified Flag
+
 ## Line Item Product Price Modifier (object) - A line item modifying the price of a product being sold.
 + PriceModifierSequenceNumber: 1 (number) - The sequence number that this price modifier modifies.  Typically this will be the sequence number of a product.
 + Type: VariablePrice (Product Price Modifier Type Enumeration) - The type of modifier.
@@ -1436,6 +1553,62 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + NewUnitPrice: 54321.76 (number) - The new price per unit.
 + Include Line Item Base
 
+## Discount Surcharge Reason Enumeration (enum)
++ ProfitCenterPeriodDiscountSurcharge
++ PolicyDiscountSurcharge
+
+## Calculation Type Enumeration (enum)
++ None - 0
++ Amount - 1
++ Open - 2
++ Percent - 3
+
+## Line Item Tender Discount V1 (object)
++ Include Item Sequence
++ Include Line Item Sequence Number
++ TenderSequence: 0 (number) - Sequence of the Line Item Tender that this discount is associated with.
++ DiscountSurchargeReason: PolicyDiscountSurcharge (Discount Surcharge Reason Enumeration) - The reason this discount was applied.
++ Rate: 0.0 (number) - Discount rate.  25% discount is denoted as 0.25
++ RoundingAmount: 0.00 (number) - Rounding amount.  Example:  A discount rate of 0.25 applied to a $0.19 total = $0.0475, which rounds to $0.05, so rounding amount will be 0.0025
++ Amount: 0.00 (number) - Discount amount.
++ ProratedFlag: false (boolean) - Prorated flag.
++ CalculationType: Percent (Calculation Type Enumeration) - The type of calculation.  Always Percent for this type of discount.
+
+## Line Item Tender Surcharge V1 (object)
++ Include Item Sequence
++ Include Line Item Sequence Number
++ TenderSequence: 0 (number) - Sequence of the Line Item Tender that this surcharge is associated with.
++ DiscountSurchargeReason: PolicyDiscountSurcharge (Discount Surcharge Reason Enumeration) - The reason this surcharge was applied.
++ Rate: 0.0 (number) - Surcharge rate.  25% surcharge is denoted as 0.25
++ RoundingAmount: 0.00 (number) - Rounding amount.  Example:  A surcharge rate of 0.25 applied to a $0.19 total = $0.0475, which rounds to $0.05, so rounding amount will be 0.0025
++ Amount: 0.00 (number) - Surcharge amount.
++ ProratedFlag: false (boolean) - Prorated flag.
++ CalculationType: Percent (Calculation Type Enumeration) - The type of calculation.  Always Percent for this type of surcharge.
+
+## Line Item Discount V1 (object)
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ KeyNumber: 0 (number) - Discount key number used [1..4], not currently supported by PR5000.
++ DiscountKeyName: Discount 1 (string) - Discount key name
++ Percentage: 0.0 (number) - Discount rate.  25% discount is denoted as 0.25
++ RoundingAmount: 0.00 (number) - Rounding amount.  Example:  A discount rate of 0.25 applied to a $0.19 total = $0.0475, which rounds to $0.05, so rounding amount will be 0.0025
++ Amount: 0.00 (number) - Discount amount.
++ ProratedFlag: false (boolean) - Prorated flag.
++ CalculationType: Percent (Calculation Type Enumeration) - The type of calculation.
+
+## Line Item Surcharge V1 (object)
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ KeyNumber: 0 (number) - Surcharge key number used [1..2], not currently supported by PR5000.
++ DiscountKeyName: Surcharge 1 (string) - Surcharge key name
++ Percentage: 0.0 (number) - Surcharge rate.  25% discount is denoted as 0.25
++ RoundingAmount: 0.00 (number) - Rounding amount.  Example:  A surcharge rate of 0.25 applied to a $0.19 total = $0.0475, which rounds to $0.05, so rounding amount will be 0.0025
++ Amount: 0.00 (number) - Surcharge amount.
++ ProratedFlag: false (boolean) - Prorated flag.
++ CalculationType: Percent (Calculation Type Enumeration) - The type of calculation.
+
 ## Line Item Product Tax (object) - A line item applying tax to a product being sold.
 + TaxScheduleId: 1 (number) - Tax Schedule Id.
 + TaxAccountName: MF4100 NoTax Acct (string) - Tax Account Name
@@ -1444,6 +1617,18 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TaxAmount: 0.00 (number) - The tax amount.
 + TaxExemptOverrideType: Normal (Tax Exempt Override Type Enumeration) - The type of tax exempt override.
 + Include Line Item Base
+
+## Line Item Product Tax V1 (object) - A line item applying tax to a product being sold.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ TaxScheduleId: 1 (number) - Tax Schedule Id.
++ TaxAccountName: MF4100 NoTax Acct (string) - Tax Account Name
++ TaxablePercent: 1.00 (number) - The taxable percent.  For PR5000, this should always be 1.00
++ TaxableAmount: 0.00 (number) - The taxable amount.  For PR5000, this should always equal the modified price of the product.
++ TaxPercent: 0.0 (number) - The tax percent.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TaxExemptOverrideType: Normal (Tax Exempt Override Type Enumeration) - The type of tax exempt override.
 
 ## Line Item Tender Base (object)
 + TenderId: 1 (number) - The identifier for the tender.
@@ -1468,8 +1653,30 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + EnrichmentParentLineItemSequence: 0 (number) - Enrichment parent line item sequence.
 + CustomerCredential (Customer Credential For Transactions) - The customer credentials associated with the line item.
 
+## Line Item Deposit V2 (object)
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ StoredValueAmount: 10.00 (number) - Amount to Deposit into Stored Value Account.
++ CardPurchaseFeeAmount: 0.00 (number) - Used by AMC when dispensing cards. Normally just leave it $0.00.
++ ActualUnitPrice: 10.00 (number) - Amount Charged to Customer for Deposit.
++ UnitCostPrice: 0.00 (number) - Cost to the Retailer.
++ StoredValueAccountTypeId: 86 (number) - Stored value account type ID.
++ EnrichmentFlag: false (boolean) - Enrichment flag.
++ EnrichmentParentLineItemSequence: 0 (number) - Enrichment parent line item sequence.
++ CustomerCredential (Customer Credential V2) - Customer credential.
+
 ## Line Item Enrichment Base (object)
 + Include Line Item Base
++ Percentage: 0.5 (number) - Percentage to be added.
++ RoundingAmount: 0.00 (number) - Rounding amount.
++ Amount: 5.00 (number) - Amount to be added.
++ StoredValueEnrichmentSequence: 1 (number) - Sv Enrichment sequence.
+
+## Line Item Enrichment V1 (object)
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
 + Percentage: 0.5 (number) - Percentage to be added.
 + RoundingAmount: 0.00 (number) - Rounding amount.
 + Amount: 5.00 (number) - Amount to be added.
@@ -1484,7 +1691,17 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RoundingAmount: 0.02 (number) - The rounding amount associated with the currency being used.  Can be negative.  For example: Canada rounds to 0.05 for cash transactions.  So an amount of 1.17 would be rounded to 1.15, resulting in a RoundingAmount of -0.02
 + Include Line Item Base
 
-## Line Item Tender Check (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
+## Line Item Tender Cash V2 (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ TenderId: 1 (number) - The identifier for the tender [this should be a cash tender].
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.02 (number) - The rounding amount associated with the currency being used.  Can be negative.  For example: Canada rounds to 0.05 for cash transactions.  So an amount of 1.17 would be rounded to 1.15, resulting in a RoundingAmount of -0.02
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
+
+## Line Item Tender Check (object) - A line item denoting that check was used as a tender in processing the sale of the transaction.
 + TenderId: 1 (number) - The identifier for the tender [this should be a check tender].
 + TenderType: Check (Tender Type Enumeration) - The type of tender.
 + TaxAmount: 0.00 (number) - The tax amount.
@@ -1493,7 +1710,17 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 
-## Line Item Tender Stored Value (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
+## Line Item Tender Check V2 (object) - A line item denoting that check was used as a tender in processing the sale of the transaction.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ TenderId: 1 (number) - The identifier for the tender [this should be a check tender].
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
+
+## Line Item Tender Stored Value (object) - A line item denoting that stored value was used as a tender in processing the sale of the transaction.
 + CustomerCredential (Customer Credential For Transactions) - The customer credentials associated with the line item.
 + TenderId: 1 (number) - The identifier for the tender [this should be a stored value tender].
 + TenderType: StoredValue (Tender Type Enumeration) - The type of tender.
@@ -1503,7 +1730,18 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 
-## Line Item Tender Cash Equiv (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
+## Line Item Tender Stored Value V2 (object) - A line item denoting that stored value was used as a tender in processing the sale of the transaction.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ TenderId: 1 (number) - The identifier for the tender [this should be a stored value tender].
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ CustomerCredential (Customer Credential V2) - Customer credential.
+
+## Line Item Tender Cash Equiv (object) - A line item denoting that cash equivalence was used as a tender in processing the sale of the transaction.
 + BoardMealTypeId: 1 (number) - The type of board meal being used.
 + CashEquivalenceAmountLimit: 9.00 (number) [optional] - The cash equivalency limit.  Checked server side against values in the database.
 + CustomerCredential (Customer Credential For Transactions) - The customer credentials associated with the line item.
@@ -1515,6 +1753,20 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TenderAmount: 21.01 (number) - The amount of tender used.
 + RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
+
+## Line Item Tender Cash Equiv V2 (object) - A line item denoting that cash equivalence was used as a tender in processing the sale of the transaction.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ TenderId: 1 (number) - The identifier for the tender [this should be a cash equiv tender].
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ CashEquivalenceAmountLimit: 9.00 (number) [optional] - The cash equivalency limit.  Checked server side against values in the database.
++ BoardMealTypeId: 1 (number) - The type of board meal being used.
++ IsGuestMeal: false (boolean) - Indicated whether or not this board transaction is a guest meal.
++ CustomerCredential (Customer Credential V2) - Customer credential.
 
 ## Line Item Tender Credit Card (object) - A line item denoting that cash was used as a tender in processing the sale of the transaction.
 + AmountRequested: 21.01 (number) - The amount requested from the credit provider.
@@ -1544,6 +1796,35 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
 + Include Line Item Base
 
+## Line Item Tender Emv V2 (object) - A line item denoting that credit card was used as a tender in processing the sale of the transaction.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ TenderId: 1 (number) - The identifier for the tender [this should be a emv tender].
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ AmountRequested: 21.01 (number) - The amount requested from the credit provider.
++ AmountAuthorized: 21.01 (number) - The amount that was authorized.
++ AuthorizationCode: 123456 (number) - The authorization code received from the credit provider.
++ CardId: 0 (number)- The card id.
++ CardSuffix (string) - Not used for Slate.
++ CommandSequence: 0 (number) - The command sequence executed on the pin pad.
++ DpsTransactionReference: ABC123 (string) - The transaction reference received from the DPS payment gateway.
++ EmvDeviceId: uni2cafejsd (string) - The identifier assigned to the device performing the credit card transaction.
++ Get1DateTime - The date and time the Get1 request was initiated against Payment Express.
++ Get1Result (Action Result Token V1) - The result of the Get1 operation.
++ MaskedPan: XXXXXXXXXX123456 (string) - The masked pan.
++ MerchantReference: 123 (string) - The merchant reference.
++ PaymentExpressRequestDateTime - The date and time the request was initiated against Payment Express.
++ PaymentExpressResponseDateTime - The date and time a response was received from Payment Express
++ PurchaseResponseCode: 00 (string) - The purchase response code.
++ Result (Action Result Token V1) - The result of the payment request.
++ SettlementDateTime - The date and time the transaction was settled.
++ Stan: 0 (number) - NEEDS DEFINITION.
++ TransactionReference: 0 (number) - The transaction reference value [referred to as TxnRef by Payment Express]
+
 ## Line Item Processing Result (object)
 + Include Request Id
 + ErrorCode: 0 (number) - The result code.  0 means sucess.
@@ -1551,6 +1832,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + TransactionLineItemType (Line Item Type Enumeration) - The type of line item this processing result represents.
 
 ## Name Value Pair (object)
++ Key: Key name (string) - The key.
++ Value: Key value (string) - The Value.
+
+## Name Value Pair V1 (object)
 + Key: Key name (string) - The key.
 + Value: Key value (string) - The Value.
 
@@ -1573,6 +1858,10 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Transaction Timestamp Base (object)
 + TimestampType (Timestamp Type Enumeration) - The type of timestamp.
 + Timestamp: `2012-04-23T18:25:43.511Z` - The timestamp.
+
+## Transaction Timestamp V2 (object)
++ TimestampType (Timestamp Type Enumeration) - The type of timestamp.
++ Timestamp: `2018-12-17T15:52:27.3018411-07:00` - The timestamp.
 
 ## Transaction Event Base (object)
 + Include Originator Guid
@@ -1615,6 +1904,11 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + IssueNumber: 4444 (string) - The issue number assigned to the card.
 + IssueNumberCaptured: true (boolean) - Indicated whether or not the issue number was captured.
 
+## Card Capture V1 (object)
++ CardNumber: 0000000000000000100001 (string) - The customer's card number.
++ IssueNumber: 4444 (string) - The issue number assigned to the card.
++ IssueNumberCaptured: true (boolean) - Indicated whether or not the issue number was captured.
+
 ## Customer Credential For Transactions (object)
 + PhysicalIdType (Physical Id Type Enumeration) - The physical type of media used in the transaction.
 + EntryMethodType (Entry Method Type Enumeration) - The method used to capture the customer's credentials.
@@ -1622,6 +1916,13 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Customer Guid
 + CustomerId - Not used for Slate (PR5000).
 + CustomerCardInfo (Customer Card Info For Transaction Customer Credential) - The customer's card information.
+
+## Customer Credential V2 (object)
++ Include Customer Guid
++ PhysicalIdType (Physical Id Type Enumeration) - The physical type of media used in the transaction.
++ EntryMethodType (Entry Method Type Enumeration) - The method used to capture the customer's credentials.
++ SecondaryAuthEntered: false (boolean) - Indicated whether or not a secondary authentication method was used.
++ CustomerCardInfo (Card Capture V1) - The customer's card information.
 
 ## Customer Credential Verify Request (object)
 + Include Request Id
@@ -1848,6 +2149,21 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Include Request Id
 + Transaction (Transaction Base) - The transaction object associated with this operation.
 
+## Transaction Post Request V2 (object)
++ Include Request Id
++ Include Generic Id
++ Include Originator Id
++ Disposition: Complete (Disposition Enumeration) - The state of the transaction.
++ ForcePost: false (boolean) - If true, transaction was performed offline and needs to be forced.  If false, transaction was online and should be treated as such.
++ TransactionTimestamps (array[Transaction Timestamp V2]) - Collection of timestamps associated with the transaction.
++ OriginatorElement (Originator Element V1) - Inherited element required in the elements part of a transaction to denote where the transaction originated from (the device).
++ OperatorElement (Operator Element V1) - Inherited element required in the elements part of a transaction to denote who performed the transaction (the operator or cashier).
++ ControlElement (Control Element V1) - Operator login or logout.
++ ArtsElement (Arts Transaction Element V2) - ARTS element.
++ AttendanceElement (Attendance Element V2) - Attendance element.
++ BoardElement (Board Element V2) - Board element.
++ NameValues (array[Name Value Pair V1]) - List of key value properties.
+
 ## Transaction Post Response (object)
 + Include Request Id
 + ErrorCode: 0 - The error code corresponding to the results of the post operation.
@@ -1881,8 +2197,14 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 ## Generic Id (object)
 + Id: `FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF` (string) - The unique identifier for the object (GUID).
 
+## Item Sequence (object)
++ Sequence: 1 (number) - Indicates the order that this line item was added to the list and serves as a unique identifier for the line item.  Consider this a corrected LineItemSequenceNumber implementation.  Starts at 1.
+
 ## Line Item Sequence Number (object)
-+ LineItemSequenceNumber: 1 (number) - Indicated the order with which this line item appears in the list of arts transction line items.
++ LineItemSequenceNumber: 1 (number) - Indicated the order with which this line item appears in the list of arts transction line items.  Legacy sequence implementation.  Some incorrect implementation details prevent this from being used as a true sequence number, as is intended by the ARTS model.
+
+## Void Flag (object)
++ VoidFlag: false (boolean) - Indiciated whether or not this line item was void.
 
 ## Merchant Guid (object)
 + MerchantGuid: `8D9CC985-ABDC-4851-BCEB-520B877031C8` (string) - The unique identifier for the merchant (GUID).
