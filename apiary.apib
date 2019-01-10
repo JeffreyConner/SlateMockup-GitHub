@@ -1401,7 +1401,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemProductTaxOverrides (array) - Empty set (not used for PR5000 devices).
 + LineItemTenderCashItems (array[Line Item Tender Cash V2]) - List of cash tenders used during the transaction.
 + LineItemTenderCheckItems (array[Line Item Tender Check V2]) - List of check tenders used during the transaction.
-+ LineItemTenderEmvItems (array[Line Item Tender Emv V2]) - WORK IN PROGRESS -- THIS OBJECT HAS NOT BEEN FINALIZED -  List of EMV tenders used during the transaction.
++ LineItemTenderEmvHitItems (array[Line Item Tender Emv Hit V2]) - WORK IN PROGRESS -- THIS OBJECT HAS NOT BEEN FINALIZED -  List of EMV tenders used during the transaction.
 + LineItemTenderStoredValueItems (array[Line Item Tender Stored Value V2]) - List of stored value tenders used during the transaction.
 + LineItemTenderCashEquivalenceItems (array[Line Item Tender Cash Equiv V2]) - List of cash equivalence tenders used during the transaction.
 + LineItemTenderDiscounts (array[Line Item Tender Discount V1]) - List of tender discounts in the transaction.
@@ -1824,7 +1824,34 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + PurchaseResponseCode: 00 (string) - The purchase response code.
 + Result (Action Result Token V1) - The result of the payment request.
 + SettlementDateTime - The date and time the transaction was settled.
-+ Stan: 0 (number) - NEEDS DEFINITION.
++ Stan: 0 (number) - The System Trace Audit Number which identifies the transaction number processed through
+the merchant account.
++ TransactionReference: 0 (number) - The transaction reference value [referred to as TxnRef by Payment Express]
+
+## Line Item Tender Emv Hit V2 (object) - A line item denoting that credit card was used as a tender in processing the sale of the transaction.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ TenderId: 1 (number) - The identifier for the tender [this should be a emv tender].
++ TenderAmount: 21.01 (number) - The amount of tender used.
++ RoundingAmount: 0.00 (number) - The rounding amount associated with the currency being used.
++ TaxAmount: 0.00 (number) - The tax amount.
++ TipAmount: 0.00 (number) - The tip amount.
++ AmountRequested: 21.01 (number) - The amount requested from the credit provider.
++ AmountAuthorized: 21.01 (number) - The amount that was authorized.
++ AuthorizationCode: 123456 (number) - The authorization code received from the credit provider.
++ CardId: 0 (number)- The card id.
++ DpsTransactionReference: ABC123 (string) - The transaction reference received from the DPS payment gateway.
++ EmvDeviceId: uni2cafejsd (string) - The identifier assigned to the device performing the credit card transaction.
++ MaskedPan: XXXXXXXXXX123456 (string) - The masked pan.
++ MerchantReference: 123 (string) - The merchant reference.
++ PaymentExpressRequestDateTime - The date and time the request was initiated against Payment Express.
++ PaymentExpressResponseDateTime - The date and time a response was received from Payment Express
++ PurchaseResponseCode: 00 (string) - The purchase response code.
++ Result (Action Result Token V1) - The result of the payment request.
++ SettlementDateTime - The date and time the transaction was settled.
++ Stan: 0 (number) - The System Trace Audit Number which identifies the transaction number processed through
+the merchant account.
 + TransactionReference: 0 (number) - The transaction reference value [referred to as TxnRef by Payment Express]
 
 ## Line Item Processing Result (object)
