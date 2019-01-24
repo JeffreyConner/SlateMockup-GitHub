@@ -1824,7 +1824,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + PurchaseResponseCode: 00 (string) - The purchase response code.
 + Result (Action Result Token V1) - The result of the payment request.
 + SettlementDateTime - The date and time the transaction was settled.
-+ Stan: 0 (number) - The System Trace Audit Number which identifies the transaction number processed through
++ SystemTraceAuditNumber: 0 (number) - The System Trace Audit Number which identifies the transaction number processed through
 the merchant account.
 + TransactionReference: 0 (number) - The transaction reference value [referred to as TxnRef by Payment Express]
 
@@ -1850,7 +1850,7 @@ the merchant account.
 + PurchaseResponseCode: 00 (string) - The purchase response code.
 + Result (Action Result Token V1) - The result of the payment request.
 + SettlementDateTime - The date and time the transaction was settled.
-+ Stan: 0 (number) - The System Trace Audit Number which identifies the transaction number processed through
++ SystemTraceAuditNumber: 0 (number) - The System Trace Audit Number which identifies the transaction number processed through
 the merchant account.
 + TransactionReference: 0 (number) - The transaction reference value [referred to as TxnRef by Payment Express]
 
@@ -2360,8 +2360,8 @@ the merchant account.
 + Unknown
 + InProcess: Transaction is in process at the originator.
 + Complete: Finished at the originator.
-+ Accepted: Finished at originator, and accepted by host/api/db.
-+ Rejected: Finished at originator, but rejected by host/api/db
++ Accepted: Finished at originator and accepted by host/api/db.
++ Rejected: Finished at originator but rejected by host/api/db
 
 ## Door Alarm Log Type Enumeration (enum)
 + HeldOpen
