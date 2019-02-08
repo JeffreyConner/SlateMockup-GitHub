@@ -1396,7 +1396,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + LineItemDiscounts (array[Line Item Discount V1]) - List of line item discounts in the transaction.
 + LineItemSurcharges (array[Line Item Surcharge V1]) - List of line item surcharges in the transaction.
 + LineItemProductTaxes (array[Line Item Product Tax V1]) - All of the product tax modifiers included in the arts transactions.  Empty set if there aren't any.
-+ LineItemProductPriceModifiers (array[Line Item Product Price Modifier]) - All of the product price modifiers included in the arts transactions.  Empty set if there aren't any.
++ LineItemProductPriceModifiers (array[Line Item Product Price Modifier V1]) - All of the product price modifiers included in the arts transactions.  Empty set if there aren't any.
 + LineItemProductTaxExemptions (array) - Empty set (not used for PR5000 devices).
 + LineItemProductTaxOverrides (array) - Empty set (not used for PR5000 devices).
 + LineItemTenderCashItems (array[Line Item Tender Cash V2]) - List of cash tenders used during the transaction.
@@ -1552,6 +1552,20 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + CalculationMethod: ManuallyEnteredPrice (Calculation Method Enumeration) - NEEDS DEFINITION.
 + NewUnitPrice: 54321.76 (number) - The new price per unit.
 + Include Line Item Base
+
+## Line Item Product Price Modifier V1 (object) - A line item modifying the price of a product being sold.
++ Include Item Sequence
++ Include Line Item Sequence Number
++ Include Void Flag
++ PriceModifierSequenceNumber: 1 (number) - The sequence number that this price modifier modifies.  Typically this will be the sequence number of a product.
++ Type: VariablePrice (Product Price Modifier Type Enumeration) - The type of modifier.
++ ProductPromoFlag: false (boolean) - Indicates if this is a product promotion.
++ ProductPromotionId: 1 (number) - If ProductPromoFlag is true, this value is the identifier of the promotion being applied.
++ PreviousUnitPrice: 0.0 (number) - The previous unit price.
++ Percent: 0 (number) - NEEDS DEFINITION.
++ Amount: 12345.67 (number) - The amount of the new price.
++ CalculationMethod: ManuallyEnteredPrice (Calculation Method Enumeration) - NEEDS DEFINITION.
++ NewUnitPrice: 54321.76 (number) - The new price per unit.
 
 ## Discount Surcharge Reason Enumeration (enum)
 + ProfitCenterPeriodDiscountSurcharge
