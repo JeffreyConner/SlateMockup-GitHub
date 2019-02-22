@@ -876,6 +876,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Tenders (array[Tender Base]) - List of tenders for the device.
 + Properties (Device Properties Base) - Device properties.
 + PosCredentialSettings (Pos Credential Settings Base) - Pos credential settings.
++ EmvHitSettings (Emv Hit Settings Base) - Emv settings for Payment Express HIT API
 
 ## Door Activity Base (object)
 + TransactionType: Door Event (string) - Transaction Type.
@@ -1146,6 +1147,16 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + MifareDesFireEnabled: true (boolean) - Credential type "Mifare DESFire" enabled.
 + MobileEnabled: true (boolean) - Credential type "Mobile" enabled.
 + BiometricEnabled: false (boolean) - Credential type "Biometric" enabled.
+
+## Emv Hit Settings Base (object)
++ Environment: QA (string)
++ Url: https://uat.paymentexpress.com/pxmi3/pos.aspx (string)
++ HitUserName: HITAPIUsername (string)
++ HitKey: HITAPIKey (string)
++ Station: 4020840750 (number)
++ CurrencyCode: USD (string)
++ DeviceId: uni2cafe1234 (string)
++ VendorId: Blackboard (string)
 
 ## Pos Option Payment Base (object)
 + Type (Payment Type Enumeration) - Payment type.
