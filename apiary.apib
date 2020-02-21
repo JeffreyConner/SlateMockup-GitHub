@@ -590,6 +590,21 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + AckowledgeAllPrevious: true (boolean) - T means the user choose to automatically acknowledge all previous open alarms.
 + Note: Everything is OK (string) - Text of the Acknowledgment.
 
+## Auxiliary Data Output Base
++ SendOnApprove: true (boolean) - Send data if transaction was approved.
++ SendOnDeny: true (boolean) - Send data if transaction was denied.
++ DataToSend: Track2 (Data to Send Enumeration) - Type of data to send.
++ SendDataOffline: true (boolean) - Send data even if offline.
++ SerialBaud: 9600 (number) - Serial port baud rate.
++ SerialDataBits: 8 (number) - Serial port data bits.
++ SerialStopBits: One (Serial Stop Bits Enumeration) - Serial port stop bits.
++ SerialParity: None (Serial Parity Enumeration) - Serial port parity.
++ Prefix: None (Affix Character Enumeration) - Character to prepend to the output data.
++ Suffix: None (Affix Character Enumeration) - Character to append to the output data.
++ Padding: None (Padding Type Enumeration) - Type of padding to perform on the output data.
++ PaddingLength: 0 (number) - Padding length.
++ PaddingValue: 0 (string) - Padding character.
+
 ## Balance Board Base (object)
 + BoardPlanId: 1 (string) - The identifier for the board plan.
 + BoardPlanName: MyBoardPlanName (string) - The name for the board plan.
@@ -877,6 +892,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + Properties (Device Properties Base) - Device properties.
 + PosCredentialSettings (Pos Credential Settings Base) - Pos credential settings.
 + EmvHitSettings (Emv Hit Settings Base) - Emv settings for Payment Express HIT API
++ AuxiliaryDataOutputSettings (Auxiliary Data Output Base) - Auxiliary data output settings.
 
 ## Door Activity Base (object)
 + TransactionType: Door Event (string) - Transaction Type.
@@ -2293,6 +2309,14 @@ the merchant account.
 ## Transaction Id (object)
 + TransactionId: `FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF` (string) - The unique identifier for the transaction (GUID).
 
+## Affix Character Enumeration (enum)
++ None - 1
++ CarriageReturn - 2
++ LineFeed - 3
++ CarriageReturnandLineFeed - 4
++ LineFeedandCarriageReturn - 5
++ Tab - 6
+
 ## Attend Type Enumeration (enum)
 + Unattended - No operator present at the point of service.
 + Attended - Numerical value 1.  Operator present at the point of service.
@@ -2362,6 +2386,12 @@ the merchant account.
 + CustomerNumber - Use a customer number to validate a customer.
 + CardNumberAndSwipe - Use a card number manually or swiped to validate a customer.
 + Any - Any other form of idenfication (provided in this enumeration) is considered valid.
+
+## Data to Send Enumeration (enum)
++ Track2 - Numerical value = 1.  Send full track 2, excluding start and end sentinels.
++ CardNumber - Numerical value = 2.  Send card number.
++ CustomerNumber - Numerical value = 3.  Send customer number.
++ CustomerDefined - Numerical value = 4.  Send customer defined field.
 
 ## Day of Week Enumeration (enum)
 + 0 - Sunday
@@ -2485,6 +2515,11 @@ the merchant account.
 + MF4100 - Numerical value 2.  MF4100 style transaction terminal.
 + PR5000 - Numerical value 3.  PR5000 style transaction terminal.
 + Workstation - Numerical value 4.  Workstation style transaction terminal.
+
+## Padding Type Enumeration (enum)
++ None - 1
++ Left - 2
++ Right - 3
 
 ## Payment Type Enumeration (enum)
 + None - 0
@@ -2639,6 +2674,19 @@ the merchant account.
 + Weekly
 + Monthly
 + Custom
+
+## Serial Stop Bits Enumeration (enum)
++ None - 0 - No stop bits are used.
++ One - 1 - One stop bit is used.
++ OnePointFive - 3 - 1.5 stop bits are used.
++ Two - 2 - Two stop bits are used.
+
+## Serial Parity Enumeration (enum)
++ Even - 2 - Sets the parity bit so that the count of bits set is an even number.
++ Mark - 3 - Leaves the parity bit set to 1.
++ None - 0 - No parity check occurs.
++ Odd - 1 - Sets the parity bit so that the count of bits set is an odd number.
++ Space - 4 - Leaves the parity bit set to 0.
 
 ## Tax Exempt Override Type Enumeration (enum)
 + Normal - 0
