@@ -8,7 +8,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
     
 ## Board Management
 
-### Board Information Get [GET /transact/api/v1/board/device/{OriginatorGuid}/customer/{CustomerGuid}/information?IsGuestMeal={isGuestMeal}&MealTypeId={mealtypeId}&ForcePost={forcePost}&BoardPlanId={boardPlanId}"]
+### Board Information Get [GET /transact/api/v1/board/device/{OriginatorGuid}/customer/{CustomerGuid}/information?IsGuestMeal={isGuestMeal}&MealTypeId={mealtypeId}&ForcePost={forcePost}&BoardPlanId={boardPlanId}]
 + Attributes
     + CustomerGuid: `cccccccc-cccc-cccc-cccc-cccccccccccc` - The unique identifier for the customer (GUID).
     + OriginatorGuid: `dddddddd-dddd-dddd-dddd-dddddddddddd` - The unique identifier for the device (GUID).
@@ -597,7 +597,7 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
 + SendDataOffline: true (boolean) - Send data even if offline.
 + SerialBaud: 9600 (number) - Serial port baud rate.
 + SerialDataBits: 8 (number) - Serial port data bits.
-+ SerialStopBits: One (Serial Stop Bits Enumeration) - Serial port stop bits.
++ SerialStopBits: 1 (number) - Serial port stop bits.  Valid values are:  1 = 1 stop bit, 2 = 2 stop bits, 3 = 1.5 stop bits.  [Number corresponds to the underlying int value of C# and Java enumerations for serial port stop bit configuration.]
 + SerialParity: None (Serial Parity Enumeration) - Serial port parity.
 + Prefix: None (Affix Character Enumeration) - Character to prepend to the output data.
 + Suffix: None (Affix Character Enumeration) - Character to append to the output data.
@@ -2675,12 +2675,6 @@ the merchant account.
 + Weekly
 + Monthly
 + Custom
-
-## Serial Stop Bits Enumeration (enum)
-+ None - 0 - No stop bits are used.
-+ One - 1 - One stop bit is used.
-+ OnePointFive - 3 - 1.5 stop bits are used.
-+ Two - 2 - Two stop bits are used.
 
 ## Serial Parity Enumeration (enum)
 + Even - 2 - Sets the parity bit so that the count of bits set is an even number.
