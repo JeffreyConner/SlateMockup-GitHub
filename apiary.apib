@@ -50,15 +50,15 @@ This is the API documentation for the Blackboard Transact Slate project.  The in
             Content-Type: application/json; charset=UTF-8
     + Attributes (Customer Stored Value Balance Get Response)
 
-### Customer Credential Verify [POST /transact/api/v1/customer/credential/verify]
+### Customer Credential Verify V2 [POST /transact/api/v2/customer/credential/verify]
 + Request (application/json)
-    + Attributes (Customer Credential Verify Request)
+    + Attributes (Customer Credential Verify Request V2)
 
 + Response 200
     + Headers
     
             Content-Type: application/json; charset=UTF-8
-    + Attributes (Customer Credential Verify Response)
+    + Attributes (Customer Credential Verify Response V2)
     
 + Response 400
     - Response code 400 is returned if there is a problem with any of the request parameters.
@@ -1995,18 +1995,33 @@ the merchant account.
 + SecondaryAuthEntered: false (boolean) - Indicated whether or not a secondary authentication method was used.
 + CustomerCardInfo (Card Capture V1) - The customer's card information.
 
-## Customer Credential Verify Request (object)
+## Customer Credential Verify Request V2 (object)
 + Include Request Id
++ Include Originator Id
 + Credentials (array[Credential Base])
-    
-## Customer Credential Verify Response (object)
+
+## Customer Credential Verify Response V2 (object)
 + Include Request Id
++ Customer (Credential Verify Customer V2)
+
+## Credential Verify Customer V2 (object)
 + Include Customer Guid
 + FirstName: tbfirstname600001 (string) - The first name of the customer.
 + LastName: tblastname600001 (string) - The last name of the customer.
 + Birthdate: null (string) - The birthdate of the customer.
-+ Email (array[string]) - The email address(es) of the customer.
++ EmailAddresses (array[string]) - The email address(es) of the customer.
 + Thumbnail (Encoded Image) - A small visual representation of the image of the customer.
++ PosMessageWaiting: false (boolean) - Pos message available for customer.
++ AttendedShowAccountBalance: false (boolean) - Show account balance on attended device.
++ AttendedPrintAccountBalance: false (boolean) - Print account on attended device.
++ UnattendedShowAccountBalance: false (boolean) - Show account balance on unattended device.
++ UnattendedPrintAccountBalance: false (boolean) - Print account balance on unattended device.
++ ShowBirthday: false (boolean) - Show birthday.
++ ShowName: false (boolean) - Show customer name.
++ PrintName: false (boolean) - Print customer name.
++ PrintCustomerNumber: false (boolean) - Print customer number.
++ PrintCardNumber: false (boolean) - Print card number.
++ AuxiliaryDataOutputValue: 0000000000000000000022 (string) - Data to output on the Aux port [when data type is customer number or defined field/group].
 
 ## Customer Stored Value Balance Get Response (object)
 + Include Customer Id
