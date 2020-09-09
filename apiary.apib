@@ -1902,6 +1902,12 @@ the merchant account.
 + DeniedText: Success (string) - The result message.
 + TransactionLineItemType (Line Item Type Enumeration) - The type of line item this processing result represents.
 
+## Stored Value Account Transaction Result (object)
++ DebitCreditType (Debit Credit Type Enumeration) - The debit or credit type of the stored value account.
++ Amount: 1.23 (number) - The amount debited from the stored value account.
++ StoredValueAccountName: BonusBucks (string) - The name of the stored value account.
++ BalanceAfterTransaction: 543.21 (number) - The balance after the transaction.
+
 ## Name Value Pair (object)
 + Key: Key name (string) - The key.
 + Value: Key value (string) - The Value.
@@ -1919,6 +1925,7 @@ the merchant account.
 + ErrorCode: 0 (number) - The result code.  0 means sucess.
 + DeniedText: Success (string) - The result message.
 + LineItemProcessingResults (array[Line Item Processing Result]) - List of results from the processing of each line item.
++ StoredValueAccountTransactionResults (array[Stored Value Account Transaction Result]) - Information about each account involved in a stored value transaction.
 
 ## Transaction Result Set Board Base (object)
 + Include Request Id
@@ -2512,6 +2519,10 @@ the merchant account.
 + LineItemRetailTransactionEnd - End list of line items.
 + LineItemTenderDiscount - LineItemTenderDiscount
 + LineItemTenderSurcharge - LineItemTenderSurcharge
+
+## Debit Credit Type Enumeration (enum)
++ Debit - Money deducted from account.
++ Credit - Money added to account.
 
 ## Meals Left By Enumeration (enum)
 + Auto - 0
